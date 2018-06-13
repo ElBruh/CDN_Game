@@ -15,7 +15,7 @@ public class moveCharacter : MonoBehaviour {
 	void Start(){
 		Debug.Log(transform.position);
 	}
-	void Update () {
+	void FixedUpdate () {
 		if (moveNext == true){
 			Next();
 			GameObject.Find("TowerManager").GetComponent<LevelManager>().LevelUp();
@@ -45,12 +45,13 @@ public class moveCharacter : MonoBehaviour {
 	public void Next(){
 		bleh += 10;
 		Debug.Log(nextFloor);
-		if (nextFloor == true){
-			transform.position = new Vector3((35.9f),bleh + 0.5f,0f);
+    transform.Translate(new Vector3(0, 10, 0), Space.World);
+    if (nextFloor == true){
+      transform.Rotate(new Vector3(0, 180, 0));
 			nextFloor = false;
 		}
 		else{
-			transform.position = new Vector3((-35.9f),bleh + 0.5f,0f);
+      transform.Rotate(new Vector3(0, 180, 0));
 			nextFloor = true;
 		}
 		Debug.Log(transform.position);
