@@ -13,8 +13,12 @@ public class WordDisplay : MonoBehaviour {
 	public List<string> ListOfWords;
 	public AudioClip tap;
 	public AudioClip badTap;
+	public AudioClip finish;
+	public AudioClip win;
 	public AudioSource source;
 	public TextMeshPro mText;
+	public TextMesh healthBarV2PreFab;
+	public TextMesh healthBarV2;
 	//private GameObject enemy;
 	//public GameObject enemyPrefab;
 	public TextMeshPro mTextPrefab;
@@ -81,6 +85,9 @@ public class WordDisplay : MonoBehaviour {
 			}
 			//if the word no longer exists, it will spawn a new one
 			if(mText.text.Length == 0){
+				
+				source.clip = finish;
+				source.Play();
 				//KillEnemy();
 				Materialize();
 				//wordExists = false;
@@ -89,6 +96,7 @@ public class WordDisplay : MonoBehaviour {
 		}
 		else
 			timer = timeleft;
+			
 		
 	}
 
@@ -98,9 +106,13 @@ public class WordDisplay : MonoBehaviour {
 		//mText = GetComponent<TextMeshPro>();
 		//enemy = Instantiate(enemyPrefab);
 		tempEnemy = parent;
-		mText = Instantiate(mTextPrefab, parent.transform.position, Quaternion.Euler(0,-123.688f,0));
+		mText = Instantiate(mTextPrefab, new Vector3(parent.transform.position.x,parent.transform.position.y+0.5f,parent.transform.position.z), Quaternion.Euler(0,-123.688f,0));
+		if(wordExists == false){
+			healthBarV2 = Instantiate(healthBarV2PreFab, new Vector3(mText.transform.position.x,mText.transform.position.y+1.25f,mText.transform.position.z), Quaternion.Euler(0,-123.688f,0));
+			healthBarV2.text = "aaaaaaaaaa";
+		}
 		mText.text = list.GetWord();
-		ListOfWords.Add(mText.text);
+		//ListOfWords.Add(mText.text);
 		wordExists = true;
 	}
 
@@ -114,6 +126,11 @@ public class WordDisplay : MonoBehaviour {
 	void ChangeColor(){
 		//Can set an active color for this word.
 		//mText.color = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
+	}
+	public void ChangeToDead(){
+		wordExists = false;
+		source.clip = win;
+		source.Play();
 	}
 	void WrongLetter(){
 		health -= 10f;

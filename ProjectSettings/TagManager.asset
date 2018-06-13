@@ -7,6 +7,7 @@ TagManager:
   - Enemy
   - Hero
   - Ladder
+  - EnemyHealth
   layers:
   - Default
   - TransparentFX

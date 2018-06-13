@@ -36,6 +36,7 @@ public class moveCharacter : MonoBehaviour {
 			Debug.Log(col.collider.tag);
 			stopMoving = true;
 			GameObject.Find("WordManager").GetComponent<WordDisplay>().NewWord(col.gameObject);
+			GameObject.Find("Main Camera").GetComponent<FollowPlayer>().inCombat = true;
 		}
 		if(col.collider.tag == "Ladder"){
 			moveNext = true;
@@ -45,13 +46,13 @@ public class moveCharacter : MonoBehaviour {
 	public void Next(){
 		bleh += 10;
 		Debug.Log(nextFloor);
-    transform.Translate(new Vector3(0, 10, 0), Space.World);
-    if (nextFloor == true){
-      transform.Rotate(new Vector3(0, 180, 0));
+    	transform.Translate(new Vector3(0, 10, 0), Space.World);
+    	if (nextFloor == true){
+      		transform.Rotate(new Vector3(0, 180, 0));
 			nextFloor = false;
 		}
 		else{
-      transform.Rotate(new Vector3(0, 180, 0));
+      		transform.Rotate(new Vector3(0, 180, 0));
 			nextFloor = true;
 		}
 		Debug.Log(transform.position);
