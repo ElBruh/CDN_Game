@@ -14,7 +14,7 @@ public class WordDisplay : MonoBehaviour {
 	public AudioClip tap;
 	public AudioClip badTap;
 	public AudioSource source;
-	private TextMeshPro mText;
+	public TextMeshPro mText;
 	//private GameObject enemy;
 	//public GameObject enemyPrefab;
 	public TextMeshPro mTextPrefab;
@@ -22,15 +22,18 @@ public class WordDisplay : MonoBehaviour {
 
 	public WordList list;
 	public Camera cam;
-	private GameObject tempEnemy;
+	public GameObject tempEnemy;
 	private bool currentLetter = false;
-	private bool wordExists = false;
+	public bool wordExists = false;
+	private float timeleft = 10;
+	public float timer;
+	public int damage = 0;
 	//private bool currentWord = false;
 
 	void Start(){
 		//InvokeRepeating("NewWord", 0, 3);
 		//NewWord();
-
+		timer = timeleft;
 	}
 	void Update(){
 		cam.backgroundColor = Color.black;
@@ -39,7 +42,19 @@ public class WordDisplay : MonoBehaviour {
 
 		//I want to get the keyboard strokes and compare them between the characters that
 		//exist in the current word (later on WORDS).
+
+		
+
 		if(wordExists == true){
+
+			timer-=Time.deltaTime;
+
+			if(timer <= 0){
+				tempEnemy.GetComponent<Life>().TakeDamage(damage);
+				damage = 0;
+				timer = timeleft;
+			}
+
 			foreach (char c in Input.inputString){
 			if (c == mText.text[0]){
 			currentLetter = true;
@@ -66,12 +81,14 @@ public class WordDisplay : MonoBehaviour {
 			}
 			//if the word no longer exists, it will spawn a new one
 			if(mText.text.Length == 0){
-				Destroy(tempEnemy);
+				//KillEnemy();
 				Materialize();
-				wordExists = false;
+				//wordExists = false;
 				//NewWord();
 			}
 		}
+		else
+			timer = timeleft;
 		
 	}
 
@@ -88,8 +105,10 @@ public class WordDisplay : MonoBehaviour {
 	}
 
 	void Materialize(){
+		damage+=10;
+		NewWord(tempEnemy);
 		//Do something cool here, or call another class to do it
-		GameObject.FindGameObjectWithTag("Hero").GetComponent<moveCharacter>().stopMoving = false; 
+		
 	}
 
 	void ChangeColor(){
