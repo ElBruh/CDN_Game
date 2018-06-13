@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 
 public class WordDisplay : MonoBehaviour {
@@ -98,7 +99,7 @@ public class WordDisplay : MonoBehaviour {
 	void WrongLetter(){
 		health -= 10f;
 		if(health <=0){
-			//gameOver();
+			SceneManager.LoadScene(0);
 		}
 		//Debug.Log("Wrong Letter");
 		//falsh the screen red for a little
