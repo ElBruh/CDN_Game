@@ -11,6 +11,6 @@ public class Timer : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		var timeLeft = GameObject.Find("WordManager").GetComponent<WordDisplay>().timer;
-		text.text = "Current Damage: " + timeLeft.ToString("0");
+		text.text = "Time Left: " + timeLeft.ToString("0");
 	}
 }
