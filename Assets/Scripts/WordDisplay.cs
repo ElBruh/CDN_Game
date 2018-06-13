@@ -6,6 +6,12 @@ using TMPro;
 
 public class WordDisplay : MonoBehaviour {
 
+
+	public float health = 100f;
+	public List<string> ListOfWords;
+	public AudioClip tap;
+	public AudioClip badTap;
+	public AudioSource source;
 	private TextMeshPro mText;
 	//private GameObject enemy;
 	//public GameObject enemyPrefab;
@@ -14,7 +20,8 @@ public class WordDisplay : MonoBehaviour {
 
 	public WordList list;
 	public Camera cam;
-	private bool currentWord = false;
+	private bool currentLetter = false;
+	//private bool currentWord = false;
 
 	void Start(){
 		//InvokeRepeating("NewWord", 0, 3);
@@ -30,19 +37,27 @@ public class WordDisplay : MonoBehaviour {
 		//exist in the current word (later on WORDS).
 		foreach (char c in Input.inputString){
 			if (c == mText.text[0]){
-			currentWord = true;
+			currentLetter = true;
 			}
-			else
+			else{
+				source.clip = badTap;
+				source.Play();
 				WrongLetter();
+			}
+				
 
 		}
 		//If the current pressed key is the first letter of a word, it will be deleted
-		if (currentWord == true){
+		if (currentLetter == true){
 			mText.text = mText.text.Remove(0,1);
+			source.clip = tap;
+			source.Play();
+
+
 			ChangeColor();
 			
 			//Debug.Log(mText.text);
-			currentWord = false;
+			currentLetter = false;
 		}
 		//if the word no longer exists, it will spawn a new one
 		if(mText.text.Length == 0){
@@ -57,8 +72,10 @@ public class WordDisplay : MonoBehaviour {
 		
 		//mText = GetComponent<TextMeshPro>();
 		//enemy = Instantiate(enemyPrefab);
+		
 		mText = Instantiate(mTextPrefab);
 		mText.text = list.GetWord();
+		ListOfWords.Add(mText.text);
 	}
 
 	void Materialize(){
@@ -70,9 +87,14 @@ public class WordDisplay : MonoBehaviour {
 		//mText.color = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
 	}
 	void WrongLetter(){
-		Debug.Log("Wrong Letter");
+		health -= 10f;
+		if(health <=0){
+			//gameOver();
+		}
+		//Debug.Log("Wrong Letter");
 		//falsh the screen red for a little
 		cam.backgroundColor = Color.red;
+		
 		//cam.backgroundColor = Color.black;
 	}
 	
