@@ -88,6 +88,7 @@ public class WordDisplay : MonoBehaviour {
 				
 				source.clip = finish;
 				source.Play();
+				
 				//KillEnemy();
 				Materialize();
 				//wordExists = false;

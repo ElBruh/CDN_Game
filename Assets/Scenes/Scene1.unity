@@ -266,6 +266,11 @@ Prefab:
       propertyPath: text
       value: 
       objectReference: {fileID: 2053690896}
+    - target: {fileID: 114594038786818064, guid: 358761ba82e7a1544b401d36214567e9,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 358761ba82e7a1544b401d36214567e9, type: 2}
   m_IsPrefabParent: 0
@@ -612,6 +617,30 @@ Prefab:
       propertyPath: m_LocalEulerAnglesHint.y
       value: 22.648
       objectReference: {fileID: 0}
+    - target: {fileID: 1926646350861592, guid: aa2935230692c184cb37e8697c1c454a, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114722077455034390, guid: aa2935230692c184cb37e8697c1c454a,
+        type: 2}
+      propertyPath: m_text
+      value: 'Current Attack: '
+      objectReference: {fileID: 0}
+    - target: {fileID: 114722077455034390, guid: aa2935230692c184cb37e8697c1c454a,
+        type: 2}
+      propertyPath: m_textInfo.characterCount
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 114722077455034390, guid: aa2935230692c184cb37e8697c1c454a,
+        type: 2}
+      propertyPath: m_textInfo.spaceCount
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114722077455034390, guid: aa2935230692c184cb37e8697c1c454a,
+        type: 2}
+      propertyPath: m_textInfo.wordCount
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: aa2935230692c184cb37e8697c1c454a, type: 2}
   m_IsPrefabParent: 0
@@ -901,6 +930,12 @@ Prefab:
       propertyPath: win
       value: 
       objectReference: {fileID: 8300000, guid: 505db3c3b79645e4db1381bc593aefb8, type: 3}
+    - target: {fileID: 114045921428211408, guid: cfb513244187b1b40b0c3b3a024b7605,
+        type: 2}
+      propertyPath: damageDomePreFab
+      value: 
+      objectReference: {fileID: 114957527802142048, guid: d81c9c22071f59a46a7efde9f2a85d05,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: cfb513244187b1b40b0c3b3a024b7605, type: 2}
   m_IsPrefabParent: 0
