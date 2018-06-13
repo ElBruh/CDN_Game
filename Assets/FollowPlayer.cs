@@ -16,8 +16,6 @@ public class FollowPlayer : MonoBehaviour {
 	
 	void MoveToPlayer(){
 		transform.position = GameObject.FindGameObjectWithTag("Hero").transform.position;
-		
-		
 	}
 	// Update is called once per frame
 	void Update () {
