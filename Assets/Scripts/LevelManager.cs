@@ -14,21 +14,16 @@ public class LevelManager : MonoBehaviour {
   public int numLevels;
   private int lastFloor;
   private int currentFloor;
-  private List<Floor> floors;
+  private List<GameObject> floors;
   // Use this for initialization
   void Start () {
-    Floor.floorTemplate = floor;
-    Floor.ceilingTemplate = ceiling;
-    Floor.ladderTemplate = ladder;
-    Instantiate(player, new Vector3(35.9f,0.5f,0f), Quaternion.identity);
-    Floor.enemiesTemplate = new List<GameObject>() { enemy };
     currentFloor = 1;
     lastFloor = 0;
-    floors = new List<Floor>();
-		for(int i=0; i < numLevels; i++)
+    floors = new List<GameObject>();
+		for(int i=0; i < numLevels; i ++)
     {
       lastFloor += 1;
-      floors.Add(new Floor(lastFloor));
+      floors.Add(RandomFloor.Create(lastFloor, 4));
     }
 	}
 	
@@ -41,32 +36,28 @@ public class LevelManager : MonoBehaviour {
     floors.RemoveAt(0);
     lastFloor += 1;
     currentFloor += 1;
-    floors.Add(new Floor(lastFloor));
+    floors.Add(RandomFloor.Create(lastFloor, 4));
   }
+  
   public float GetCurrentFloorY()
   {
-    return floors[0].GetFloorY;
+    GameObject floor = floors[currentFloor];
+    RandomFloor rf = floor.GetComponent<RandomFloor>();
+    return rf.GetFloorY;
   }
+  
 }
-
-public class Floor : Object
+/*
+public class Floor
 {
-  public static GameObject floorTemplate;
-  public static GameObject ceilingTemplate;
-  public static GameObject ladderTemplate;
-  public static GameObject mainPlayer;
-  public static List<GameObject> enemiesTemplate;
-  public GameObject floor;
-  public GameObject ceiling;
-  public List<GameObject> enemies;
-  public GameObject ladder;
+  
   public float floorHeight = 5;
   public float floorBottom2CeilingHeight = 10;
   public float floorWidth = 80;
-  private float ladderMargin = 3.0f;
+  
   private int floorNum;
 
-  public Floor(int floorNum)
+  public Floor(int floorNum) 
   {
     this.floorNum = floorNum;
     floor = GameObject.Instantiate(floorTemplate, new Vector3(0, (floorNum - 1) * floorBottom2CeilingHeight - floorHeight/2), Quaternion.identity);
@@ -91,3 +82,9 @@ public class Floor : Object
   public float GetFloorY { get { return (floorNum - 1) * floorBottom2CeilingHeight; } }
   public int GetFloorNum { get { return floorNum; } }
 }
+
+public class Room
+{
+  
+}
+*/
