@@ -71,14 +71,7 @@ ModelImporter:
     optimizeGameObjects: 0
     motionNodeName: 
     rigImportErrors: 
-    rigImportWarnings: "Avatar Rig Configuration mis-match. Bone length in configuration
-      does not match position in animation file:\n\t'mixamorig:LeftUpLeg' : position
-      error = 12090.888672 mm\n\t'mixamorig:LeftLeg' : position error = 45199.660156
-      mm\n\t'mixamorig:LeftFoot' : position error = 37593.871094 mm\n\t'mixamorig:LeftToeBase'
-      : position error = 8678.863281 mm\n\t'mixamorig:RightUpLeg' : position error
-      = 12086.454102 mm\n\t'mixamorig:RightLeg' : position error = 45177.582031 mm\n\t'mixamorig:RightFoot'
-      : position error = 37633.179688 mm\n\t'mixamorig:RightToeBase' : position error
-      = 8890.464844 mm\n"
+    rigImportWarnings: 
     animationImportErrors: 
     animationImportWarnings: 
     animationRetargetingWarnings: 
@@ -338,7 +331,7 @@ ModelImporter:
       scale: {x: 1, y: 1, z: 1}
     - name: mixamorig:Hips
       parentName: Run With Sword(Clone)
-      position: {x: 0.0006726298, y: 0.1747142, z: -0.0049937544}
+      position: {x: 0.0006726298, y: 0.1747142, z: -0.004993755}
       rotation: {x: 0.12600711, y: 0.031432863, z: -0.022495592, w: 0.991276}
       scale: {x: 1, y: 1, z: 1}
     - name: mixamorig:LeftUpLeg
@@ -348,22 +341,22 @@ ModelImporter:
       scale: {x: 1, y: 1, z: 1}
     - name: mixamorig:LeftLeg
       parentName: mixamorig:LeftUpLeg
-      position: {x: -0, y: 0.083948, z: 0}
+      position: {x: -0, y: 0.08394801, z: 0}
       rotation: {x: 0.31707823, y: -0.09430412, z: 0.0034757906, w: -0.9436928}
       scale: {x: 1, y: 1, z: 1}
     - name: mixamorig:LeftFoot
       parentName: mixamorig:LeftLeg
-      position: {x: -0, y: 0.069822, z: 0}
+      position: {x: -0, y: 0.069822006, z: 0}
       rotation: {x: 0.15399672, y: -0.8737846, z: -0.39903584, w: 0.23142126}
       scale: {x: 1, y: 1, z: 1}
     - name: mixamorig:LeftToeBase
       parentName: mixamorig:LeftFoot
-      position: {x: -0, y: 0.016119, z: 0}
+      position: {x: -0, y: 0.016119001, z: 0}
       rotation: {x: 0.27448282, y: 0.032363474, z: -0.012660812, w: 0.96096385}
       scale: {x: 1, y: 1, z: 1}
     - name: mixamorig:LeftToe_End
       parentName: mixamorig:LeftToeBase
-      position: {x: -0, y: 0.007316, z: 0}
+      position: {x: -0, y: 0.0073160003, z: 0}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: mixamorig:RightUpLeg
@@ -413,7 +406,7 @@ ModelImporter:
       scale: {x: 1, y: 1, z: 1}
     - name: mixamorig:LeftArm
       parentName: mixamorig:LeftShoulder
-      position: {x: -0, y: 0.026441, z: 0}
+      position: {x: -0, y: 0.026441002, z: 0}
       rotation: {x: 0.033371042, y: -0.08561172, z: -0.054898582, w: 0.9942551}
       scale: {x: 1, y: 1, z: 1}
     - name: mixamorig:LeftForeArm
@@ -423,12 +416,12 @@ ModelImporter:
       scale: {x: 1, y: 1, z: 1}
     - name: mixamorig:LeftHand
       parentName: mixamorig:LeftForeArm
-      position: {x: -0, y: 0.041045003, z: 0}
+      position: {x: -0, y: 0.041045006, z: 0}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: mixamorig:Neck
       parentName: mixamorig:Spine2
-      position: {x: -0, y: 0.03209, z: 0}
+      position: {x: -0, y: 0.032090005, z: 0}
       rotation: {x: -0.09015053, y: -0.008148313, z: 0.05128345, w: 0.99457353}
       scale: {x: 1, y: 1, z: 1}
     - name: mixamorig:Head
@@ -448,12 +441,12 @@ ModelImporter:
       scale: {x: 1, y: 1, z: 1}
     - name: mixamorig:RightArm
       parentName: mixamorig:RightShoulder
-      position: {x: -0, y: 0.026441, z: 0}
+      position: {x: -0, y: 0.026441002, z: 0}
       rotation: {x: 0.03669465, y: -0.06054688, z: -0.02645688, w: 0.99713975}
       scale: {x: 1, y: 1, z: 1}
     - name: mixamorig:RightForeArm
       parentName: mixamorig:RightArm
-      position: {x: -0, y: 0.05181, z: 0}
+      position: {x: -0, y: 0.051810004, z: 0}
       rotation: {x: -0.014227023, y: -0.14592007, z: 0.0037866896, w: 0.9891869}
       scale: {x: 1, y: 1, z: 1}
     - name: mixamorig:RightHand
