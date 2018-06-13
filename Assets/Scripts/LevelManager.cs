@@ -5,6 +5,8 @@ using UnityEngine;
 
 
 public class LevelManager : MonoBehaviour {
+
+  public GameObject player;
   public GameObject floor;
   public GameObject enemy;
   public GameObject ladder;
@@ -18,11 +20,12 @@ public class LevelManager : MonoBehaviour {
     Floor.floorTemplate = floor;
     Floor.ceilingTemplate = ceiling;
     Floor.ladderTemplate = ladder;
+    Instantiate(player, new Vector3(35.9f,0.5f,0f), Quaternion.identity);
     Floor.enemiesTemplate = new List<GameObject>() { enemy };
     currentFloor = 1;
     lastFloor = 0;
     floors = new List<Floor>();
-		for(int i=0; i < numLevels; i ++)
+		for(int i=0; i < numLevels; i++)
     {
       lastFloor += 1;
       floors.Add(new Floor(lastFloor));
@@ -42,7 +45,7 @@ public class LevelManager : MonoBehaviour {
   }
   public float GetCurrentFloorY()
   {
-    return floors[currentFloor].GetFloorY;
+    return floors[0].GetFloorY;
   }
 }
 
@@ -51,6 +54,7 @@ public class Floor : Object
   public static GameObject floorTemplate;
   public static GameObject ceilingTemplate;
   public static GameObject ladderTemplate;
+  public static GameObject mainPlayer;
   public static List<GameObject> enemiesTemplate;
   public GameObject floor;
   public GameObject ceiling;
@@ -82,6 +86,7 @@ public class Floor : Object
     {
       GameObject.Instantiate(ladderTemplate, new Vector3(-floorWidth / 2 + ladderMargin, ((floorNum - 1) * floorBottom2CeilingHeight) + floorHeight / 2), Quaternion.identity);
     }
+    
   }
   public float GetFloorY { get { return (floorNum - 1) * floorBottom2CeilingHeight; } }
   public int GetFloorNum { get { return floorNum; } }

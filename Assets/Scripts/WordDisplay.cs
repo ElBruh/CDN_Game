@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+
 public class WordDisplay : MonoBehaviour {
 
 
@@ -20,12 +21,14 @@ public class WordDisplay : MonoBehaviour {
 
 	public WordList list;
 	public Camera cam;
+	private GameObject tempEnemy;
 	private bool currentLetter = false;
+	private bool wordExists = false;
 	//private bool currentWord = false;
 
 	void Start(){
 		//InvokeRepeating("NewWord", 0, 3);
-		NewWord();
+		//NewWord();
 
 	}
 	void Update(){
@@ -35,7 +38,8 @@ public class WordDisplay : MonoBehaviour {
 
 		//I want to get the keyboard strokes and compare them between the characters that
 		//exist in the current word (later on WORDS).
-		foreach (char c in Input.inputString){
+		if(wordExists == true){
+			foreach (char c in Input.inputString){
 			if (c == mText.text[0]){
 			currentLetter = true;
 			}
@@ -48,38 +52,43 @@ public class WordDisplay : MonoBehaviour {
 
 		}
 		//If the current pressed key is the first letter of a word, it will be deleted
-		if (currentLetter == true){
-			mText.text = mText.text.Remove(0,1);
-			source.clip = tap;
-			source.Play();
+			if (currentLetter == true){
+				mText.text = mText.text.Remove(0,1);
+				source.clip = tap;
+				source.Play();
 
 
-			ChangeColor();
+				ChangeColor();
 			
-			//Debug.Log(mText.text);
-			currentLetter = false;
-		}
-		//if the word no longer exists, it will spawn a new one
-		if(mText.text.Length == 0){
-			Materialize();
-			NewWord();
+				//Debug.Log(mText.text);
+				currentLetter = false;
+			}
+			//if the word no longer exists, it will spawn a new one
+			if(mText.text.Length == 0){
+				Destroy(tempEnemy);
+				Materialize();
+				wordExists = false;
+				//NewWord();
+			}
 		}
 		
 	}
 
 	//will call the GetWord function from the WordList class to get a new word
-	void NewWord(){
+	public void NewWord(GameObject parent){
 		
 		//mText = GetComponent<TextMeshPro>();
 		//enemy = Instantiate(enemyPrefab);
-		
-		mText = Instantiate(mTextPrefab);
+		tempEnemy = parent;
+		mText = Instantiate(mTextPrefab, parent.transform.position, Quaternion.Euler(0,-123.688f,0));
 		mText.text = list.GetWord();
 		ListOfWords.Add(mText.text);
+		wordExists = true;
 	}
 
 	void Materialize(){
 		//Do something cool here, or call another class to do it
+		GameObject.FindGameObjectWithTag("Hero").GetComponent<moveCharacter>().stopMoving = false; 
 	}
 
 	void ChangeColor(){
