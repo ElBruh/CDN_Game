@@ -7,10 +7,6 @@ using UnityEngine;
 public class LevelManager : MonoBehaviour {
 
   public GameObject player;
-  public GameObject floor;
-  public GameObject enemy;
-  public GameObject ladder;
-  public GameObject ceiling;
   public int numLevels;
   private int lastFloor;
   private int currentFloor;
