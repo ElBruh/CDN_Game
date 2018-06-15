@@ -144,7 +144,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8f6de1dee7ab9140a4359a7584e13c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cam: {fileID: 4929505}
   inCombat: 0
+  FirstPerson: 0
 --- !u!81 &4929503
 AudioListener:
   m_ObjectHideFlags: 0
@@ -180,7 +182,7 @@ Camera:
     height: 1
   near clip plane: -10
   far clip plane: 1000
-  field of view: 89.2
+  field of view: 82.8
   orthographic: 1
   orthographic size: 5.24
   m_Depth: 0

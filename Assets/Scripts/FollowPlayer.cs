@@ -5,10 +5,12 @@ using UnityEngine;
 public class FollowPlayer : MonoBehaviour {
 
 	// Use this for initialization
+	public Camera cam;
 	private float vertical = 5.33f;
 	private float horizontal = 20f;
 	private float z = 1.9f;
 	public bool inCombat = false;
+	public bool FirstPerson;
 	private Transform target;
 	void Start () {
 		//give enough time for player to spawn
@@ -23,14 +25,24 @@ public class FollowPlayer : MonoBehaviour {
 		target = GameObject.FindGameObjectWithTag("Hero").transform;
 		
 		if(inCombat == true){
-			//target = GameObject.Find("WordManager").GetComponent<WordDisplay>().tempEnemy.transform;
+			//target = GameObject.Find("WordManager").GetComponent<WordDisplay>().mText.transform;
 		}
-			
 		
 		horizontal = target.position.x;
 		vertical = target.position.y;
 		z = target.position.z;
-		transform.position = new Vector3(horizontal + 5, vertical + 3, z + 8);
-		transform.LookAt(target);
+		//transform.position = new Vector3(horizontal + 3, vertical + 3, z + 5);
+		if (FirstPerson == true){
+			//cam.orthographic = false;
+			//cam.targetDisplay = 1;
+			//cam.targetDisplay = 0;
+			transform.position = new Vector3(horizontal,vertical + 1.05f,z);
+			transform.rotation = target.rotation;
+		}
+		else{
+			//cam.orthographic = true;
+			transform.position = new Vector3(horizontal +1.5f, vertical + 1f, z + 3f);
+			transform.LookAt(target);
+		}
 	}
 }

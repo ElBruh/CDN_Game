@@ -4,11 +4,9 @@ using UnityEngine;
 
 public class Life : MonoBehaviour {
 
-	public float life;
+	public float life = 100f;
 	// Use this for initialization
-	void Start () {
-		life = 100;
-	}
+
 
 	public void TakeDamage(int damage){
 		life -= damage;
@@ -21,11 +19,11 @@ public class Life : MonoBehaviour {
 	}
 	void Die(){
 		life = 0;
-		Destroy(gameObject);
 		GameObject.FindGameObjectWithTag("Hero").GetComponent<moveCharacter>().stopMoving = false; 
-		Destroy(GameObject.Find("WordManager").GetComponent<WordDisplay>().mText);
+		GameObject.Find("WordManager").GetComponent<WordDisplay>().mText.text = "";
 		GameObject.Find("WordManager").GetComponent<WordDisplay>().ChangeToDead();
 		GameObject.Find("Main Camera").GetComponent<FollowPlayer>().inCombat = false;
 		GameObject.FindGameObjectWithTag("EnemyHealth").GetComponent<ManageEnemyHealthBar>().Die();
+		Destroy(gameObject);
 	}
 }

@@ -12,8 +12,8 @@ public class ManageEnemyHealthBar : MonoBehaviour {
 	}
 
 	public void Damage(int damage){
-		Debug.Log("healthTotake: " + damage);
-		Debug.Log("Characters: " + word.text.Length);
+		//Debug.Log("healthTotake: " + damage);
+		//Debug.Log("Characters: " + word.text.Length);
 		if(damage > word.text.Length){
 			damage = word.text.Length;
 		}

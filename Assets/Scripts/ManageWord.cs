@@ -8,7 +8,10 @@ public class ManageWord : MonoBehaviour {
 	void Update () {
 		//if the current word no longer has letters, it will destro itself
 		if (word.text.Length == 0){
-			Destroy(gameObject);
-		}
+			Die();
+		}	
+	}
+	public void Die(){
+		Destroy(gameObject);
 	}
 }

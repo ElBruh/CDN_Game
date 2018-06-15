@@ -10,7 +10,6 @@ public class WordDisplay : MonoBehaviour {
 
 
 	public float health = 100f;
-	public List<string> ListOfWords;
 	public AudioClip tap;
 	public AudioClip badTap;
 	public AudioClip finish;
@@ -29,7 +28,7 @@ public class WordDisplay : MonoBehaviour {
 	public GameObject tempEnemy;
 	private bool currentLetter = false;
 	public bool wordExists = false;
-	private float timeleft = 10;
+	public float timeleft = 10;
 	public float timer;
 	public int damage = 0;
 	//private bool currentWord = false;
@@ -52,6 +51,16 @@ public class WordDisplay : MonoBehaviour {
 		if(wordExists == true){
 
 			timer-=Time.deltaTime;
+			if(mText.text.Length == 0){
+				
+				source.clip = finish;
+				source.Play();
+				
+				//KillEnemy();
+				AddDamage();
+				//wordExists = false;
+				//NewWord();
+			}
 
 			if(timer <= 0){
 				tempEnemy.GetComponent<Life>().TakeDamage(damage);
@@ -76,24 +85,12 @@ public class WordDisplay : MonoBehaviour {
 				mText.text = mText.text.Remove(0,1);
 				source.clip = tap;
 				source.Play();
-
-
-				ChangeColor();
 			
 				//Debug.Log(mText.text);
 				currentLetter = false;
 			}
 			//if the word no longer exists, it will spawn a new one
-			if(mText.text.Length == 0){
-				
-				source.clip = finish;
-				source.Play();
-				
-				//KillEnemy();
-				Materialize();
-				//wordExists = false;
-				//NewWord();
-			}
+			
 		}
 		else
 			timer = timeleft;
@@ -107,17 +104,18 @@ public class WordDisplay : MonoBehaviour {
 		//mText = GetComponent<TextMeshPro>();
 		//enemy = Instantiate(enemyPrefab);
 		tempEnemy = parent;
-		mText = Instantiate(mTextPrefab, new Vector3(parent.transform.position.x,parent.transform.position.y+0.5f,parent.transform.position.z), Quaternion.Euler(0,-123.688f,0));
+		mText = Instantiate(mTextPrefab, new Vector3(parent.transform.position.x,parent.transform.position.y+0.5f,parent.transform.position.z),tempEnemy.transform.rotation);
+		//new enemy
 		if(wordExists == false){
-			healthBarV2 = Instantiate(healthBarV2PreFab, new Vector3(mText.transform.position.x,mText.transform.position.y+1.25f,mText.transform.position.z), Quaternion.Euler(0,-123.688f,0));
+			healthBarV2 = Instantiate(healthBarV2PreFab, new Vector3(mText.transform.position.x,mText.transform.position.y+1.25f,mText.transform.position.z), tempEnemy.transform.rotation);//Quaternion.Euler(0,-123.688f,0));
 			healthBarV2.text = "aaaaaaaaaa";
 		}
 		mText.text = list.GetWord();
-		//ListOfWords.Add(mText.text);
+	
 		wordExists = true;
 	}
 
-	void Materialize(){
+	void AddDamage(){
 		damage+=10;
 		NewWord(tempEnemy);
 		//Do something cool here, or call another class to do it
@@ -130,6 +128,7 @@ public class WordDisplay : MonoBehaviour {
 	}
 	public void ChangeToDead(){
 		wordExists = false;
+		
 		source.clip = win;
 		source.Play();
 	}
