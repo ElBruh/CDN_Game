@@ -13,6 +13,9 @@ public class moveCharacter : MonoBehaviour {
   private int moveHash = Animator.StringToHash("Move");
   private int walkHash = Animator.StringToHash("GuardedWalk");
   private int combatHash = Animator.StringToHash("CombatStart");
+  private int dieHash = Animator.StringToHash("Die");
+  private int blockHash = Animator.StringToHash("Block");
+  private int attackHash = Animator.StringToHash("Attack");
   // Update is called once per frame
   void Start(){
 		Debug.Log(transform.position);
@@ -45,27 +48,29 @@ public class moveCharacter : MonoBehaviour {
   public void StartMoving()
   {
     moveSpeed = 2f;
-    animator.SetTrigger("Move");
+    animator.SetTrigger(moveHash);
   }
   public void ApproachEnemy()
   {
     moveSpeed = 1f;
-    animator.SetTrigger("GuardedWalk");
+    animator.SetTrigger(walkHash);
   }
   public void CombatStart(GameObject enemy)
   {
     moveSpeed = 0f;
-    animator.SetTrigger("CombatStart");
+    animator.SetTrigger(combatHash);
     GameObject.Find("WordManager").GetComponent<WordDisplay>().NewWord(enemy);
     GameObject.Find("Main Camera").GetComponent<FollowPlayer>().inCombat = true;
   }
   public void Attack()
   {
-
+    moveSpeed = 0f;
+    animator.SetTrigger(combatHash);
   }
   public void Die()
   {
     moveSpeed = 0f;
+    animator.SetTrigger(dieHash);
   }
   public void Next(){
 		Debug.Log(nextFloor);
