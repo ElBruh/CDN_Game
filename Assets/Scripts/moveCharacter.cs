@@ -59,6 +59,10 @@ public class moveCharacter : MonoBehaviour {
     GameObject.Find("WordManager").GetComponent<WordDisplay>().NewWord(enemy);
     GameObject.Find("Main Camera").GetComponent<FollowPlayer>().inCombat = true;
   }
+  public void Attack()
+  {
+
+  }
   public void Die()
   {
     moveSpeed = 0f;
