@@ -41,7 +41,7 @@ public class FollowPlayer : MonoBehaviour {
 		}
 		else{
 			//cam.orthographic = true;
-			transform.position = new Vector3(horizontal +1.5f, vertical + 1f, z + 3f);
+			transform.position = new Vector3(horizontal +1.5f, vertical + 0.75f, z + 3f);
 			transform.LookAt(target);
 		}
 	}

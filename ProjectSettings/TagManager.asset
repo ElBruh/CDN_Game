@@ -8,6 +8,7 @@ TagManager:
   - Hero
   - Ladder
   - EnemyHealth
+  - HitPointBar
   layers:
   - Default
   - TransparentFX

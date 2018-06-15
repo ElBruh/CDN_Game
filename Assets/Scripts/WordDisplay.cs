@@ -15,13 +15,10 @@ public class WordDisplay : MonoBehaviour {
 	public AudioClip finish;
 	public AudioClip win;
 	public AudioSource source;
-	public TextMeshPro mText;
-	public TextMesh healthBarV2PreFab;
-	public TextMesh healthBarV2;
-	//private GameObject enemy;
-	//public GameObject enemyPrefab;
+	public Canvas enemyBarPrefab;
 	public TextMeshPro mTextPrefab;
-	//private TextMesh word;
+	public TextMeshPro mText;
+	public Canvas healthBarV2;
 
 	public WordList list;
 	public Camera cam;
@@ -30,13 +27,14 @@ public class WordDisplay : MonoBehaviour {
 	public bool wordExists = false;
 	public float timeleft = 10;
 	public float timer;
-	public int damage = 0;
+	public float damage = 0;
+	private float damageToGive;
 	//private bool currentWord = false;
 
 	void Start(){
 		//InvokeRepeating("NewWord", 0, 3);
 		//NewWord();
-		timer = timeleft;
+		//timer = timeleft;
 	}
 	void Update(){
 		cam.backgroundColor = Color.black;
@@ -63,8 +61,9 @@ public class WordDisplay : MonoBehaviour {
 			}
 
 			if(timer <= 0){
-				tempEnemy.GetComponent<Life>().TakeDamage(damage);
-				damage = 0;
+				tempEnemy.GetComponent<Life>().TakeDamage(damageToGive);
+				GameObject.FindGameObjectWithTag("HitPointBar").GetComponent<ManageHitPoints>().Clear();
+				damageToGive = 0;
 				timer = timeleft;
 			}
 
@@ -85,8 +84,6 @@ public class WordDisplay : MonoBehaviour {
 				mText.text = mText.text.Remove(0,1);
 				source.clip = tap;
 				source.Play();
-			
-				//Debug.Log(mText.text);
 				currentLetter = false;
 			}
 			//if the word no longer exists, it will spawn a new one
@@ -107,8 +104,8 @@ public class WordDisplay : MonoBehaviour {
 		mText = Instantiate(mTextPrefab, new Vector3(parent.transform.position.x,parent.transform.position.y+1f,parent.transform.position.z),Quaternion.Euler(0,-90,0));
 		//new enemy
 		if(wordExists == false){
-			healthBarV2 = Instantiate(healthBarV2PreFab, new Vector3(mText.transform.position.x,mText.transform.position.y+1.25f,mText.transform.position.z), Quaternion.Euler(0,-90,0));//Quaternion.Euler(0,-123.688f,0));
-			healthBarV2.text = "aaaaaaaaaa";
+			healthBarV2 = Instantiate(enemyBarPrefab, new Vector3(mText.transform.position.x,mText.transform.position.y+1f,mText.transform.position.z+1.5f), Quaternion.Euler(0,-90,0));//Quaternion.Euler(0,-123.688f,0));
+			//healthBarV2.text = "aaaaaaaaaa";
 		}
 		mText.text = list.GetWord();
 	
@@ -116,7 +113,11 @@ public class WordDisplay : MonoBehaviour {
 	}
 
 	void AddDamage(){
-		damage+=10;
+		damage = 10;
+		damageToGive += 10;
+		GameObject.FindGameObjectWithTag("HitPointBar").GetComponent<ManageHitPoints>().BuildUp(damage);
+		
+		
 		NewWord(tempEnemy);
 		//Do something cool here, or call another class to do it
 		
@@ -133,7 +134,9 @@ public class WordDisplay : MonoBehaviour {
 		source.Play();
 	}
 	void WrongLetter(){
+		GameObject.FindGameObjectWithTag("HitPointBar").GetComponent<ManageHitPoints>().Clear();
 		health -= 10f;
+		damageToGive = 0;
 		if(health <=0){
 			SceneManager.LoadScene(0);
 		}

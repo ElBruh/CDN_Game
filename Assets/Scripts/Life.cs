@@ -8,17 +8,18 @@ public class Life : MonoBehaviour {
 	// Use this for initialization
 
 
-	public void TakeDamage(int damage){
+	public void TakeDamage(float damage){
 		life -= damage;
-		var takeDam = (damage / 10);
-		Debug.Log(takeDam);
-		GameObject.FindGameObjectWithTag("EnemyHealth").GetComponent<ManageEnemyHealthBar>().Damage(takeDam);
+		//var takeDam = (damage / 10);
+		//Debug.Log(takeDam);
+		GameObject.FindGameObjectWithTag("EnemyHealth").GetComponent<ManageEnemyHealthBar>().Damage(damage);
 		if(life <= 0){
 			Die();
 		}
 	}
-	void Die(){
-		life = 0;   
+
+	public void Die(){
+		life = 0;
 		GameObject.Find("WordManager").GetComponent<WordDisplay>().mText.text = "";
 		GameObject.Find("WordManager").GetComponent<WordDisplay>().ChangeToDead();
 		GameObject.Find("Main Camera").GetComponent<FollowPlayer>().inCombat = false;
