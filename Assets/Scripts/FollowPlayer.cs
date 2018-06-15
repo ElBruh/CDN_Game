@@ -11,6 +11,8 @@ public class FollowPlayer : MonoBehaviour {
 	private float z = 1.9f;
 	public bool inCombat = false;
 	public bool FirstPerson;
+	public Vector3 rotOffset;
+	public Vector3 posOffset;
 	private Transform target;
 	void Start () {
 		//give enough time for player to spawn
@@ -41,8 +43,8 @@ public class FollowPlayer : MonoBehaviour {
 		}
 		else{
 			//cam.orthographic = true;
-			transform.position = new Vector3(horizontal +1.5f, vertical + 0.75f, z + 3f);
-			transform.LookAt(target);
+			transform.position = target.position + posOffset;
+			transform.LookAt(target.position + rotOffset);
 		}
 	}
 }
