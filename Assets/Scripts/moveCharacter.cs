@@ -5,26 +5,27 @@ using UnityEngine;
 public class moveCharacter : MonoBehaviour {
 
 	public float moveSpeed = 2f;
-	public bool stopMoving = false;
 	public bool nextFloor = false;
 	public bool moveNext = false;
 	public Vector3 right;
 	public Vector3 left;
-	public float bleh;
-	// Update is called once per frame
-	void Start(){
+  private Animator animator;
+  private int moveHash = Animator.StringToHash("Move");
+  private int walkHash = Animator.StringToHash("GuardedWalk");
+  private int combatHash = Animator.StringToHash("CombatStart");
+  // Update is called once per frame
+  void Start(){
 		Debug.Log(transform.position);
+    animator = GetComponent<Animator>();
+    moveSpeed = 0f;
+    Invoke("StartMoving", 3f);
 	}
 	void FixedUpdate () {
 		if (moveNext == true){
 			Next();
 			GameObject.Find("TowerManager").GetComponent<LevelManager>().LevelUp();
 		}
-		if(stopMoving == true){
-			moveSpeed = 0;
-		}
-		else
-			moveSpeed = 2;
+
 		if(nextFloor == true){
 			transform.Translate  (left * Time.deltaTime * moveSpeed, Space.World);
 		}
@@ -34,25 +35,43 @@ public class moveCharacter : MonoBehaviour {
 	public void OnCollisionEnter(Collision col){
 		if(col.collider.tag == "Enemy"){
 			Debug.Log(col.collider.tag);
-			stopMoving = true;
-			GameObject.Find("WordManager").GetComponent<WordDisplay>().NewWord(col.gameObject);
-			GameObject.Find("Main Camera").GetComponent<FollowPlayer>().inCombat = true;
 		}
 		if(col.collider.tag == "Ladder"){
 			moveNext = true;
 		}
 		
 	}
-	public void Next(){
-		bleh += 10;
+
+  public void StartMoving()
+  {
+    moveSpeed = 2f;
+    animator.SetTrigger("Move");
+  }
+  public void ApproachEnemy()
+  {
+    moveSpeed = 1f;
+    animator.SetTrigger("GuardedWalk");
+  }
+  public void CombatStart(GameObject enemy)
+  {
+    moveSpeed = 0f;
+    animator.SetTrigger("CombatStart");
+    GameObject.Find("WordManager").GetComponent<WordDisplay>().NewWord(enemy);
+    GameObject.Find("Main Camera").GetComponent<FollowPlayer>().inCombat = true;
+  }
+  public void Die()
+  {
+    moveSpeed = 0f;
+  }
+  public void Next(){
 		Debug.Log(nextFloor);
-    	transform.Translate(new Vector3(0, 10, 0), Space.World);
-    	if (nextFloor == true){
-      		transform.Rotate(new Vector3(0, 180, 0));
+    transform.Translate(new Vector3(0, 10, 0), Space.World);
+    if (nextFloor == true){
+      transform.Rotate(new Vector3(0, 180, 0));
 			nextFloor = false;
 		}
 		else{
-      		transform.Rotate(new Vector3(0, 180, 0));
+      transform.Rotate(new Vector3(0, 180, 0));
 			nextFloor = true;
 		}
 		Debug.Log(transform.position);

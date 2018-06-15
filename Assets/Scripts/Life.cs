@@ -18,12 +18,12 @@ public class Life : MonoBehaviour {
 		}
 	}
 	void Die(){
-		life = 0;
-		GameObject.FindGameObjectWithTag("Hero").GetComponent<moveCharacter>().stopMoving = false; 
+		life = 0;   
 		GameObject.Find("WordManager").GetComponent<WordDisplay>().mText.text = "";
 		GameObject.Find("WordManager").GetComponent<WordDisplay>().ChangeToDead();
 		GameObject.Find("Main Camera").GetComponent<FollowPlayer>().inCombat = false;
 		GameObject.FindGameObjectWithTag("EnemyHealth").GetComponent<ManageEnemyHealthBar>().Die();
 		Destroy(gameObject);
-	}
+    GameObject.FindGameObjectWithTag("Hero").GetComponent<moveCharacter>().StartMoving();
+  }
 }

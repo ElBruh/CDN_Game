@@ -203,11 +203,11 @@ ModelImporter:
     - boneName: mixamorig:Neck
       humanName: Neck
       limit:
-        min: {x: 0, y: 0, z: 0}
-        max: {x: 0, y: 0, z: 0}
+        min: {x: -63.809525, y: -152.38097, z: -40}
+        max: {x: 65.714294, y: 180, z: 40}
         value: {x: 0, y: 0, z: 0}
         length: 0
-        modified: 0
+        modified: 1
     - boneName: mixamorig:Head
       humanName: Head
       limit:

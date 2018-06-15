@@ -88,7 +88,11 @@ public class RandomRoom : MonoBehaviour
       randomIdx = rnd.Next(roomLUT.enemies.Count);
       rr.enemy = Instantiate(roomLUT.enemies[randomIdx]);
       rr.enemy.transform.SetParent(go.transform);
-      rr.enemy.transform.localPosition = new Vector3(0, 0.5f, 0);
+      rr.enemy.transform.localPosition = new Vector3(0, 0.0f, 0);
+      if (evenFloor)
+        rr.enemy.transform.Rotate(new Vector3(0, -90, 0));
+      else
+        rr.enemy.transform.Rotate(new Vector3(0, 90, 0));
     }
 
     return go;
