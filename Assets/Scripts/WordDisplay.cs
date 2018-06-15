@@ -104,10 +104,10 @@ public class WordDisplay : MonoBehaviour {
 		//mText = GetComponent<TextMeshPro>();
 		//enemy = Instantiate(enemyPrefab);
 		tempEnemy = parent;
-		mText = Instantiate(mTextPrefab, new Vector3(parent.transform.position.x,parent.transform.position.y+0.5f,parent.transform.position.z),tempEnemy.transform.rotation);
+		mText = Instantiate(mTextPrefab, new Vector3(parent.transform.position.x,parent.transform.position.y+1f,parent.transform.position.z),Quaternion.Euler(0,-90,0));
 		//new enemy
 		if(wordExists == false){
-			healthBarV2 = Instantiate(healthBarV2PreFab, new Vector3(mText.transform.position.x,mText.transform.position.y+1.25f,mText.transform.position.z), tempEnemy.transform.rotation);//Quaternion.Euler(0,-123.688f,0));
+			healthBarV2 = Instantiate(healthBarV2PreFab, new Vector3(mText.transform.position.x,mText.transform.position.y+1.25f,mText.transform.position.z), Quaternion.Euler(0,-90,0));//Quaternion.Euler(0,-123.688f,0));
 			healthBarV2.text = "aaaaaaaaaa";
 		}
 		mText.text = list.GetWord();
