@@ -79,9 +79,9 @@ public class RandomRoom : MonoBehaviour
       rr.ladder = Instantiate(roomLUT.ladder);
       rr.ladder.transform.SetParent(go.transform);
       if (evenFloor)
-        rr.ladder.transform.localPosition = new Vector3(rr.roomWidth/2 - rr.ladderMargin, rr.roomPieceHeight / 2, 0);
+        rr.ladder.transform.localPosition = new Vector3(rr.roomWidth/2 - rr.ladderMargin, 0, 0);
       else
-        rr.ladder.transform.localPosition = new Vector3(-rr.roomWidth/2 + rr.ladderMargin, rr.roomPieceHeight / 2, 0);
+        rr.ladder.transform.localPosition = new Vector3(-rr.roomWidth/2 + rr.ladderMargin, 0, 0);
     }
     if(hasEnemy)
     {
