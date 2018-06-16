@@ -10,6 +10,6 @@ public class HealthBar : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		health.value = GameObject.Find("WordManager").GetComponent<WordDisplay>().health;
+		health.value = GameObject.Find("WordManager").GetComponent<CombatManager>().health;
 	}
 }
