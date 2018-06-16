@@ -23,7 +23,11 @@ public class moveCharacter : MonoBehaviour {
     moveSpeed = 0f;
     Invoke("StartMoving", 3f);
 	}
-	void FixedUpdate () {
+  public void HitEnemy()
+  {
+    GameObject.Find("WordManager").GetComponent<CombatManager>().EnemyHitByHero();
+  }
+  void FixedUpdate () {
 		if (moveNext == true){
 			Next();
 			GameObject.Find("TowerManager").GetComponent<LevelManager>().LevelUp();
@@ -73,6 +77,10 @@ public class moveCharacter : MonoBehaviour {
   {
     moveSpeed = 0f;
     animator.SetTrigger(dieHash);
+  }
+  public void Block()
+  {
+    animator.SetTrigger(blockHash);
   }
   public void Next(){
 		Debug.Log(nextFloor);
