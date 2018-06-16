@@ -9,7 +9,7 @@ public class Damage : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		var currentDamage = GameObject.Find("WordManager").GetComponent<WordDisplay>().damage;
+		var currentDamage = GameObject.Find("WordManager").GetComponent<CombatManager>().damage;
 		text.text = "Current Attack: " + currentDamage.ToString();
 	}
 }

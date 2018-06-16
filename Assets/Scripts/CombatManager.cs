@@ -12,6 +12,7 @@ public enum CombatStates
   HeroAttack,
   HeroAttacking,
   EnemyAttack,
+  EnemyAttacking,
   HeroDying,
   EnemyDefeated,
   OutofCombat
@@ -91,7 +92,6 @@ public class CombatManager : MonoBehaviour {
 
           if (timer <= 0)
           {
-            wordExists = false;
             mText.text = "";
             combatState = CombatStates.HeroAttack;
           }
@@ -133,7 +133,8 @@ public class CombatManager : MonoBehaviour {
         break;
 
       case CombatStates.EnemyAttack:
-        combatState = CombatStates.InputSetup;
+        combatState = CombatStates.EnemyAttacking;
+        tempEnemy.GetComponent<Enemy>().Attack();
         break;
 
       default:
@@ -185,8 +186,7 @@ public class CombatManager : MonoBehaviour {
 		//mText.color = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
 	}
 	public void ChangeToDead(){
-		wordExists = false;
-		
+		wordExists = false;		
 		source.clip = win;
 		source.Play();
 	}
@@ -210,8 +210,27 @@ public class CombatManager : MonoBehaviour {
     this.tempEnemy = enemy;
     combatState = CombatStates.InputSetup;
   }
-
-  public void ResolveHeroAttack()
+  public void ResolveEnemyAttack()
+  {
+    Debug.Log("Resolving enemy attack");
+    bool dead = false;
+    if (dead)
+    {
+      
+    }
+    else
+    {
+      combatState = CombatStates.InputSetup;
+    }
+  }
+  public void EnemyDeathCleanUp()
+  {
+    GameObject.Find("Main Camera").GetComponent<FollowPlayer>().inCombat = false;
+    Destroy(tempEnemy);
+    combatState = CombatStates.OutofCombat;
+    hero.GetComponent<moveCharacter>().StartMoving();
+  }
+  public void EnemyHitByHero()
   {
     bool dead = tempEnemy.GetComponent<Life>().TakeDamage(damageToGive);
     if (dead)
@@ -219,15 +238,30 @@ public class CombatManager : MonoBehaviour {
       GameObject.FindGameObjectWithTag("HitPointBar").GetComponent<ManageHitPoints>().Clear();
       damageToGive = 0;
       ChangeToDead();
-      GameObject.Find("Main Camera").GetComponent<FollowPlayer>().inCombat = false;
       GameObject.FindGameObjectWithTag("EnemyHealth").GetComponent<ManageEnemyHealthBar>().Die();
-      Destroy(tempEnemy);
-      combatState = CombatStates.OutofCombat;
-      hero.GetComponent<moveCharacter>().StartMoving();
+      tempEnemy.GetComponent<Enemy>().Die();
+      combatState = CombatStates.EnemyDefeated;
     }
     else
     {
-      combatState = CombatStates.EnemyAttack;
+      tempEnemy.GetComponent<Enemy>().Block();
     }
+  }
+  public void HeroHitByEnemy()
+  {
+    bool dead = false;
+    if (dead)
+    {
+
+    }
+    else
+    {
+      hero.GetComponent<moveCharacter>().Block();
+    }
+  }
+  public void ResolveHeroAttack()
+  {
+    if(tempEnemy.GetComponent<Life>().life > 0)
+      combatState = CombatStates.EnemyAttack;
   }
 }
