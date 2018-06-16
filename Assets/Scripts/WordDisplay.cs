@@ -101,7 +101,15 @@ public class WordDisplay : MonoBehaviour {
 		//mText = GetComponent<TextMeshPro>();
 		//enemy = Instantiate(enemyPrefab);
 		tempEnemy = parent;
-		mText = Instantiate(mTextPrefab, new Vector3(parent.transform.position.x,parent.transform.position.y+1f,parent.transform.position.z),Quaternion.Euler(0,-90,0));
+		if(GameObject.FindGameObjectWithTag("Hero").GetComponent<moveCharacter>().nextFloor == false){
+			cam.GetComponent<FollowPlayer>().rotOffset.x = -6.51f;
+			mText = Instantiate(mTextPrefab, new Vector3(parent.transform.position.x,parent.transform.position.y+1f,parent.transform.position.z),Quaternion.Euler(0,-90,0));
+		}
+		else if(GameObject.FindGameObjectWithTag("Hero").GetComponent<moveCharacter>().nextFloor == true){
+			cam.GetComponent<FollowPlayer>().rotOffset.x = 6.51f;
+			mText = Instantiate(mTextPrefab, new Vector3(parent.transform.position.x,parent.transform.position.y+1f,parent.transform.position.z+7),Quaternion.Euler(0,90,0));
+		}
+		//mText = Instantiate(mTextPrefab, new Vector3(parent.transform.position.x,parent.transform.position.y+1f,parent.transform.position.z),Quaternion.Euler(0,-90,0));
 		//new enemy
 		if(wordExists == false){
 			healthBarV2 = Instantiate(enemyBarPrefab, new Vector3(mText.transform.position.x,mText.transform.position.y+1f,mText.transform.position.z+1.5f), Quaternion.Euler(0,-90,0));//Quaternion.Euler(0,-123.688f,0));
@@ -114,7 +122,7 @@ public class WordDisplay : MonoBehaviour {
 
 	void AddDamage(){
 		damage = 10;
-		damageToGive += 10;
+		damageToGive += damage;
 		GameObject.FindGameObjectWithTag("HitPointBar").GetComponent<ManageHitPoints>().BuildUp(damage);
 		
 		
