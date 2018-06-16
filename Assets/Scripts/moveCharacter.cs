@@ -59,13 +59,15 @@ public class moveCharacter : MonoBehaviour {
   {
     moveSpeed = 0f;
     animator.SetTrigger(combatHash);
-    GameObject.Find("WordManager").GetComponent<WordDisplay>().NewWord(enemy);
+    GameObject.Find("WordManager").GetComponent<CombatManager>().CombatStart(this.gameObject, enemy);
     GameObject.Find("Main Camera").GetComponent<FollowPlayer>().inCombat = true;
   }
+
   public void Attack()
   {
+    Debug.Log("Performing attack!");
     moveSpeed = 0f;
-    animator.SetTrigger(combatHash);
+    animator.SetTrigger(attackHash);
   }
   public void Die()
   {

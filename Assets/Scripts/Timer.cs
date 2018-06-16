@@ -10,7 +10,7 @@ public class Timer : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		var timeLeft = GameObject.Find("WordManager").GetComponent<WordDisplay>().timer;
+		var timeLeft = GameObject.Find("WordManager").GetComponent<CombatManager>().timer;
 		text.value = timeLeft;
 	}
 }

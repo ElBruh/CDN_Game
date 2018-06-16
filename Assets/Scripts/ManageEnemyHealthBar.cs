@@ -7,8 +7,8 @@ public class ManageEnemyHealthBar : MonoBehaviour {
 	public Slider slide;
 
 	void Start(){
-		slide.maxValue = GameObject.Find("WordManager").GetComponent<WordDisplay>().tempEnemy.GetComponent<Life>().life;
-		slide.value =  GameObject.Find("WordManager").GetComponent<WordDisplay>().tempEnemy.GetComponent<Life>().life;
+		slide.maxValue = GameObject.Find("WordManager").GetComponent<CombatManager>().tempEnemy.GetComponent<Life>().life;
+		slide.value =  GameObject.Find("WordManager").GetComponent<CombatManager>().tempEnemy.GetComponent<Life>().life;
 	}
 	public void Die(){
 		Destroy(transform.parent.gameObject);
