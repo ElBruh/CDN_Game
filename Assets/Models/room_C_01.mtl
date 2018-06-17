@@ -1,8 +1,3 @@
-# MagicaVoxel @ Ephtracy
-
-newmtl palette
-illum 1
-Ka 0.000 0.000 0.000
-Kd 1.000 1.000 1.000
-Ks 0.000 0.000 0.000
-map_Kd room_C_01.png
+version https://git-lfs.github.com/spec/v1
+oid sha256:d28fab4205da1d2207a58dff69e9a1b789ba0a52d2a17ee34ff076d4d4f48835
+size 141
