@@ -47,14 +47,30 @@ public class RandomRoom : MonoBehaviour
       if (i == 0)
       {
         // instantiate left piece
-        randomIdx = rnd.Next(roomLUT.leftPieces.Count);
-        roomPiece = Instantiate(roomLUT.leftPieces[randomIdx]);        
+        if ((!evenFloor && floorNum > 1 && roomID == 0) ||
+              (evenFloor && roomID == roomCount - 1))
+        {
+          roomPiece = Instantiate(roomLUT.floorLeftEnd);
+        }
+        else
+        {
+          randomIdx = rnd.Next(roomLUT.leftPieces.Count);
+          roomPiece = Instantiate(roomLUT.leftPieces[randomIdx]);
+        }
       }
       else if (i == numRoomPieces - 1)
       {
         // Instantiate right piece
-        randomIdx = rnd.Next(roomLUT.rightPieces.Count);
-        roomPiece = Instantiate(roomLUT.rightPieces[randomIdx]);
+        if ((!evenFloor && roomID == roomCount - 1) ||
+              (evenFloor && roomID == 0))
+        {
+          roomPiece = Instantiate(roomLUT.floorRightEnd);
+        }
+        else
+        {
+          randomIdx = rnd.Next(roomLUT.rightPieces.Count);
+          roomPiece = Instantiate(roomLUT.rightPieces[randomIdx]);
+        }
         
       }
       else
