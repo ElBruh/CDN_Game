@@ -12,6 +12,6 @@ public class HeroAttackEndSMB : StateMachineBehaviour
 
   override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
   {
-    GameObject.Find("WordManager").GetComponent<CombatManager>().ResolveHeroAttack();
+    GameObject.Find("CombatManager").GetComponent<CombatManager>().ResolveHeroAttack();
   }
 }

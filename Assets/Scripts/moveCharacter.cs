@@ -25,7 +25,7 @@ public class moveCharacter : MonoBehaviour {
 	}
   public void HitEnemy()
   {
-    GameObject.Find("WordManager").GetComponent<CombatManager>().EnemyHitByHero();
+    GameObject.Find("CombatManager").GetComponent<CombatManager>().EnemyHitByHero();
   }
   void FixedUpdate () {
 		if (moveNext == true){
@@ -63,7 +63,7 @@ public class moveCharacter : MonoBehaviour {
   {
     moveSpeed = 0f;
     animator.SetTrigger(combatHash);
-    GameObject.Find("WordManager").GetComponent<CombatManager>().CombatStart(this.gameObject, enemy);
+    GameObject.Find("CombatManager").GetComponent<CombatManager>().CombatStart(this.gameObject, enemy);
     GameObject.Find("Main Camera").GetComponent<FollowPlayer>().inCombat = true;
   }
 

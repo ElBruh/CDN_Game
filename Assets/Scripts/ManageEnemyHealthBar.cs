@@ -7,8 +7,8 @@ public class ManageEnemyHealthBar : MonoBehaviour {
 	public Slider slide;
 
 	void Start(){
-		slide.maxValue = GameObject.Find("WordManager").GetComponent<CombatManager>().tempEnemy.GetComponent<Life>().life;
-		slide.value =  GameObject.Find("WordManager").GetComponent<CombatManager>().tempEnemy.GetComponent<Life>().life;
+		slide.maxValue = GameObject.Find("CombatManager").GetComponent<CombatManager>().tempEnemy.GetComponent<Life>().life;
+		slide.value =  GameObject.Find("CombatManager").GetComponent<CombatManager>().tempEnemy.GetComponent<Life>().life;
 	}
 	public void Die(){
 		Destroy(transform.parent.gameObject);
@@ -17,7 +17,7 @@ public class ManageEnemyHealthBar : MonoBehaviour {
 	public void Damage(float damage){
 		//Debug.Log("healthTotake: " + damage);
 		//Debug.Log("Characters: " + word.text.Length);
-		//slide.maxValue = GameObject.Find("WordManager").GetComponent<WordDisplay>().tempEnemy.GetComponent<Life>().life;
+		//slide.maxValue = GameObject.Find("CombatManager").GetComponent<WordDisplay>().tempEnemy.GetComponent<Life>().life;
 		if(damage > slide.value){
 			damage = slide.value;
 		}

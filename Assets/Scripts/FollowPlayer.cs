@@ -27,7 +27,7 @@ public class FollowPlayer : MonoBehaviour {
 		target = GameObject.FindGameObjectWithTag("Hero").transform;
 		
 		if(inCombat == true){
-			//target = GameObject.Find("WordManager").GetComponent<WordDisplay>().mText.transform;
+			//target = GameObject.Find("CombatManager").GetComponent<WordDisplay>().mText.transform;
 		}
 		
 		horizontal = target.position.x;

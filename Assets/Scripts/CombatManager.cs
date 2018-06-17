@@ -26,6 +26,7 @@ public class CombatManager : MonoBehaviour {
 	public AudioClip badTap;
 	public AudioClip finish;
 	public AudioClip win;
+  public AudioClip introSong;
 	public AudioSource source;
   public AudioSource EncounterMusic;
   public AudioSource MainMusic;
@@ -57,6 +58,9 @@ public class CombatManager : MonoBehaviour {
     //timer = timeleft;
     animator = GetComponent<Animator>();
     combatState = CombatStates.OutofCombat;
+    /*We can decide when to start and end the intro music */
+    //MainMusic.clip = introSong;
+    //MainMusic.Play();
   }
 	void Update(){
     switch (combatState)

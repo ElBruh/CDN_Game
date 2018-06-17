@@ -9,8 +9,8 @@ public class EnemyHealth : MonoBehaviour {
 	private float enemyHealth;
 	
 	void Update () {
-		if(GameObject.Find("WordManager").GetComponent<CombatManager>().tempEnemy != null){
-			enemyHealth = GameObject.Find("WordManager").GetComponent<CombatManager>().tempEnemy.GetComponent<Life>().life;
+		if(GameObject.Find("CombatManager").GetComponent<CombatManager>().tempEnemy != null){
+			enemyHealth = GameObject.Find("CombatManager").GetComponent<CombatManager>().tempEnemy.GetComponent<Life>().life;
 		}
 		else
 			enemyHealth = 0;

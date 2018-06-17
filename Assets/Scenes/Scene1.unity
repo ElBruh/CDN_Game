@@ -8,8 +8,9 @@ OcclusionCullingSettings:
     smallestOccluder: 5
     smallestHole: 0.25
     backfaceThreshold: 100
-  m_SceneGUID: 00000000000000000000000000000000
-  m_OcclusionCullingData: {fileID: 0}
+  m_SceneGUID: ef31c0a7a49703d45a5a952b1c063419
+  m_OcclusionCullingData: {fileID: 36300000, guid: f784bc8d57ca41f47ab68252abed786e,
+    type: 2}
 --- !u!104 &2
 RenderSettings:
   m_ObjectHideFlags: 0
@@ -1480,6 +1481,15 @@ Prefab:
       propertyPath: EncounterMusic
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 1722087272626586, guid: cfb513244187b1b40b0c3b3a024b7605, type: 2}
+      propertyPath: m_Name
+      value: CombatManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 114395229659507714, guid: cfb513244187b1b40b0c3b3a024b7605,
+        type: 2}
+      propertyPath: introSong
+      value: 
+      objectReference: {fileID: 8300000, guid: cf11af53ec920fa4abc487ae9c01f45d, type: 3}
     m_RemovedComponents:
     - {fileID: 95616230001945898, guid: cfb513244187b1b40b0c3b3a024b7605, type: 2}
     - {fileID: 114969159257459724, guid: cfb513244187b1b40b0c3b3a024b7605, type: 2}
