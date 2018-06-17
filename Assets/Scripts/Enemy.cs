@@ -9,10 +9,12 @@ public class Enemy : MonoBehaviour {
   private int attackHash = Animator.StringToHash("Attack");
   private int dieHash = Animator.StringToHash("Die");
   private int blockHash = Animator.StringToHash("Block");
+  public ParticleSystem attackPS;
 
   // Use this for initialization
   void Start () {
     animator = GetComponent<Animator>();
+    attackPS = GetComponent<ParticleSystem>();
 	}
 	
 	// Update is called once per frame
@@ -39,6 +41,15 @@ public class Enemy : MonoBehaviour {
   public void Block()
   {
     animator.SetTrigger(blockHash);
+  }
+  public void StartAttackEffect()
+  {
+    attackPS.Play();
+  }
+
+  public void StopAttackEffect()
+  {
+    attackPS.Stop();
   }
 
 }
