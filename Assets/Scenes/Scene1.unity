@@ -1448,6 +1448,12 @@ Prefab:
       propertyPath: cam
       value: 
       objectReference: {fileID: 4929505}
+    - target: {fileID: 114395229659507714, guid: cfb513244187b1b40b0c3b3a024b7605,
+        type: 2}
+      propertyPath: enemyBarPrefab
+      value: 
+      objectReference: {fileID: 223174300564575904, guid: abd38139be475004b85339a20ae48543,
+        type: 2}
     m_RemovedComponents:
     - {fileID: 95616230001945898, guid: cfb513244187b1b40b0c3b3a024b7605, type: 2}
     - {fileID: 114969159257459724, guid: cfb513244187b1b40b0c3b3a024b7605, type: 2}
