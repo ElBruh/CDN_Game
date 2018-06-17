@@ -9,7 +9,7 @@ public class LevelManager : MonoBehaviour {
   public GameObject player;
   public int numLevels;
   private int lastFloor;
-  private int currentFloor;
+  public int currentFloor;
   private List<GameObject> floors;
   // Use this for initialization
   void Start () {

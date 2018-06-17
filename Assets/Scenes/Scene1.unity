@@ -44,7 +44,7 @@ RenderSettings:
 LightmapSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 11
-  m_GIWorkflowMode: 0
+  m_GIWorkflowMode: 1
   m_GISettings:
     serializedVersion: 2
     m_BounceScale: 1
@@ -89,7 +89,8 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaIndirect: 2
     m_PVRFilteringAtrousPositionSigmaAO: 1
     m_ShowResolutionOverlay: 1
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000002, guid: a9ba710fd42a9054fb2be220421c5b38,
+    type: 2}
   m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
@@ -437,7 +438,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.2943663, g: 0.402445, b: 0.5943396, a: 0.49019608}
+  m_Color: {r: 0.21115166, g: 0.38530883, b: 0.6886792, a: 0.41960785}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -539,6 +540,11 @@ RectTransform:
   m_AnchoredPosition: {x: -5, y: 0}
   m_SizeDelta: {x: -20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!82 &1268523503 stripped
+AudioSource:
+  m_PrefabParentObject: {fileID: 82879893467331474, guid: 3ec351ddcc06bbe4caf06e9c4f14d80b,
+    type: 2}
+  m_PrefabInternal: {fileID: 1841946653}
 --- !u!1001 &1419190360
 Prefab:
   m_ObjectHideFlags: 0
@@ -872,7 +878,7 @@ Prefab:
     - target: {fileID: 114875299321873874, guid: aa2935230692c184cb37e8697c1c454a,
         type: 2}
       propertyPath: m_Color.a
-      value: 0.49019608
+      value: 0.46666667
       objectReference: {fileID: 0}
     - target: {fileID: 1057462781506000, guid: aa2935230692c184cb37e8697c1c454a, type: 2}
       propertyPath: m_IsActive
@@ -881,12 +887,12 @@ Prefab:
     - target: {fileID: 224687425235496342, guid: aa2935230692c184cb37e8697c1c454a,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: -699
+      value: 261
       objectReference: {fileID: 0}
     - target: {fileID: 224687425235496342, guid: aa2935230692c184cb37e8697c1c454a,
         type: 2}
       propertyPath: m_SizeDelta.x
-      value: -1493.4
+      value: 426.59998
       objectReference: {fileID: 0}
     - target: {fileID: 224027015685622616, guid: aa2935230692c184cb37e8697c1c454a,
         type: 2}
@@ -946,6 +952,11 @@ Prefab:
       propertyPath: m_Name
       value: Health
       objectReference: {fileID: 0}
+    - target: {fileID: 224687425235496342, guid: aa2935230692c184cb37e8697c1c454a,
+        type: 2}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: aa2935230692c184cb37e8697c1c454a, type: 2}
   m_IsPrefabParent: 0
@@ -965,7 +976,7 @@ GameObject:
   - component: {fileID: 1489689979}
   - component: {fileID: 1489689978}
   m_Layer: 5
-  m_Name: Timer
+  m_Name: 'AttackTimer '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -987,10 +998,10 @@ RectTransform:
   m_Father: {fileID: 1461289563}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -699, y: 413.84}
-  m_SizeDelta: {x: 426.6, y: 30.8}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 261, y: -126.16}
+  m_SizeDelta: {x: 426.59998, y: 30.799988}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1489689978
 MonoBehaviour:
@@ -1318,6 +1329,11 @@ Prefab:
       propertyPath: Loop
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 82879893467331474, guid: 3ec351ddcc06bbe4caf06e9c4f14d80b,
+        type: 2}
+      propertyPath: m_Volume
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3ec351ddcc06bbe4caf06e9c4f14d80b, type: 2}
   m_IsPrefabParent: 0
@@ -1368,7 +1384,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.05900677, g: 0.42555678, b: 0.735849, a: 1}
+  m_Color: {r: 0, g: 0.5433526, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -1454,6 +1470,16 @@ Prefab:
       value: 
       objectReference: {fileID: 223174300564575904, guid: abd38139be475004b85339a20ae48543,
         type: 2}
+    - target: {fileID: 114395229659507714, guid: cfb513244187b1b40b0c3b3a024b7605,
+        type: 2}
+      propertyPath: MainMusic
+      value: 
+      objectReference: {fileID: 1268523503}
+    - target: {fileID: 114395229659507714, guid: cfb513244187b1b40b0c3b3a024b7605,
+        type: 2}
+      propertyPath: EncounterMusic
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 95616230001945898, guid: cfb513244187b1b40b0c3b3a024b7605, type: 2}
     - {fileID: 114969159257459724, guid: cfb513244187b1b40b0c3b3a024b7605, type: 2}

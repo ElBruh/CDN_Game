@@ -17,12 +17,13 @@ public class ManageHitPoints : MonoBehaviour {
 		
 		//currentMax += damage;
 		hitPoint.value += damage;
+		hitPoint.maxValue = GameObject.Find("WordManager").GetComponent<CombatManager>().tempEnemy.GetComponent<Life>().life;
 		Debug.Log("BuildUP: " + hitPoint.value);
 		if(hitPoint.value >= GameObject.Find("WordManager").GetComponent<CombatManager>().tempEnemy.GetComponent<Life>().life){
 			//GameObject.Find("WordManager").GetComponent<WordDisplay>().tempEnemy.GetComponent<Life>().Die();
-      return true;
+      		return true;
 		}
-    return false;
+		return false;
 	}
 
 	//if we ever want to do it by keystroke

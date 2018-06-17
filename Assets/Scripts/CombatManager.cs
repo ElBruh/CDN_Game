@@ -27,6 +27,8 @@ public class CombatManager : MonoBehaviour {
 	public AudioClip finish;
 	public AudioClip win;
 	public AudioSource source;
+  public AudioSource EncounterMusic;
+  public AudioSource MainMusic;
 	public Canvas enemyBarPrefab;
 	public TextMeshPro mTextPrefab;
 	public TextMeshPro mText;
@@ -46,6 +48,7 @@ public class CombatManager : MonoBehaviour {
   //private bool currentWord = false;
   private GameObject hero;
   public CombatStates combatState;
+  //private bool changeMusic;
   
 
 	void Start(){
@@ -59,6 +62,7 @@ public class CombatManager : MonoBehaviour {
     switch (combatState)
     {
       case CombatStates.InputSetup:
+        //changeMusic = true;
         timer = timeleft;
         NewWord(tempEnemy);
         combatState = CombatStates.TakingInput;
@@ -140,6 +144,14 @@ public class CombatManager : MonoBehaviour {
       default:
         break;
     }
+    /*if(changeMusic == true){
+      MainMusic.volume -= 1 * Time.deltaTime/2;
+      EncounterMusic.volume += 0.5f * Time.deltaTime/2;
+    }
+    else if (changeMusic == false){
+      MainMusic.volume += 0.5f * Time.deltaTime/2;
+      EncounterMusic.volume -= 1 * Time.deltaTime/2;
+    }*/
     
 
   }
@@ -206,8 +218,10 @@ public class CombatManager : MonoBehaviour {
 
   public void CombatStart(GameObject hero, GameObject enemy)
   {
+    var levelOfRoom = GameObject.Find("TowerManager").GetComponent<LevelManager>().currentFloor;
     this.hero = hero;
     this.tempEnemy = enemy;
+    tempEnemy.GetComponent<Life>().life = 10 * levelOfRoom;
     combatState = CombatStates.InputSetup;
   }
   public void ResolveEnemyAttack()
@@ -225,6 +239,7 @@ public class CombatManager : MonoBehaviour {
   }
   public void EnemyDeathCleanUp()
   {
+    //changeMusic = false;
     GameObject.Find("Main Camera").GetComponent<FollowPlayer>().inCombat = false;
     Destroy(tempEnemy);
     combatState = CombatStates.OutofCombat;
@@ -244,6 +259,8 @@ public class CombatManager : MonoBehaviour {
     }
     else
     {
+      //clearing hitpointbar in case the enemy attacks
+      GameObject.FindGameObjectWithTag("HitPointBar").GetComponent<ManageHitPoints>().Clear();
       tempEnemy.GetComponent<Enemy>().Block();
     }
   }

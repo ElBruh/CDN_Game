@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class Life : MonoBehaviour {
 
-	public float life = 100f;
+	public float life;
   // Use this for initialization
 
   public void Start()
   {
-    life = 20f;
+    Debug.Log("Enemy Health: " + life);
   }
   /**
    * Returns true if dead. 
