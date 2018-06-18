@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class moveCharacter : MonoBehaviour {
 
-	public float moveSpeed = 2f;
+	public float moveSpeed = 4f;
 	public bool nextFloor = false;
 	public bool moveNext = false;
 	public Vector3 right;
@@ -25,7 +25,7 @@ public class moveCharacter : MonoBehaviour {
 	}
   public void HitEnemy()
   {
-    GameObject.Find("CombatManager").GetComponent<CombatManager>().EnemyHitByHero();
+    GameObject.Find("ObstacleManager").GetComponent<CombatManager>().EnemyHitByHero();
   }
   void FixedUpdate () {
 		if (moveNext == true){
@@ -51,19 +51,19 @@ public class moveCharacter : MonoBehaviour {
 
   public void StartMoving()
   {
-    moveSpeed = 2f;
+    moveSpeed = 4f;
     animator.SetTrigger(moveHash);
   }
   public void ApproachEnemy()
   {
-    moveSpeed = 1f;
+    moveSpeed = 2f;
     animator.SetTrigger(walkHash);
   }
   public void CombatStart(GameObject enemy)
   {
     moveSpeed = 0f;
     animator.SetTrigger(combatHash);
-    GameObject.Find("CombatManager").GetComponent<CombatManager>().CombatStart(this.gameObject, enemy);
+    GameObject.Find("ObstacleManager").GetComponent<CombatManager>().CombatStart(this.gameObject, enemy);
     GameObject.Find("Main Camera").GetComponent<FollowPlayer>().inCombat = true;
   }
 

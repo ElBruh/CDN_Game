@@ -1483,13 +1483,39 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1722087272626586, guid: cfb513244187b1b40b0c3b3a024b7605, type: 2}
       propertyPath: m_Name
-      value: CombatManager
+      value: ObstacleManager
       objectReference: {fileID: 0}
     - target: {fileID: 114395229659507714, guid: cfb513244187b1b40b0c3b3a024b7605,
         type: 2}
       propertyPath: introSong
       value: 
       objectReference: {fileID: 8300000, guid: cf11af53ec920fa4abc487ae9c01f45d, type: 3}
+    - target: {fileID: 114045921428211408, guid: cfb513244187b1b40b0c3b3a024b7605,
+        type: 2}
+      propertyPath: mTextPrefab
+      value: 
+      objectReference: {fileID: 114860781570423608, guid: cb0be5c1bac0bc44a85d6cbd5c038945,
+        type: 2}
+    - target: {fileID: 114045921428211408, guid: cfb513244187b1b40b0c3b3a024b7605,
+        type: 2}
+      propertyPath: finish
+      value: 
+      objectReference: {fileID: 8300000, guid: b95443d426ad0f34a96f6cce8ef7c93d, type: 3}
+    - target: {fileID: 114045921428211408, guid: cfb513244187b1b40b0c3b3a024b7605,
+        type: 2}
+      propertyPath: badTap
+      value: 
+      objectReference: {fileID: 8300000, guid: 1e48fb6e4a643b344bc72e4b204452e4, type: 3}
+    - target: {fileID: 114045921428211408, guid: cfb513244187b1b40b0c3b3a024b7605,
+        type: 2}
+      propertyPath: tap
+      value: 
+      objectReference: {fileID: 8300000, guid: 848c0b3f38b54cd42aee65460b0b2bfd, type: 3}
+    - target: {fileID: 114045921428211408, guid: cfb513244187b1b40b0c3b3a024b7605,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 95616230001945898, guid: cfb513244187b1b40b0c3b3a024b7605, type: 2}
     - {fileID: 114969159257459724, guid: cfb513244187b1b40b0c3b3a024b7605, type: 2}

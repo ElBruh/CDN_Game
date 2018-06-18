@@ -23,7 +23,7 @@ public class Enemy : MonoBehaviour {
 	}
   public void HitHero()
   {
-    GameObject.Find("CombatManager").GetComponent<CombatManager>().HeroHitByEnemy();
+    GameObject.Find("ObstacleManager").GetComponent<CombatManager>().HeroHitByEnemy();
   }
   public void Attack()
   {

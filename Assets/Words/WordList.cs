@@ -29,3 +29,19 @@ public class WordList {
 
 }
 
+[System.Serializable]
+public class EncouragementsList
+{
+  private string[] phrases = {"keep going", "you can do it", "never give up", "you're doing well",  "keep it up", "i believe in you", "good job"};
+
+
+
+  public string GetPhrase()
+  {
+    //will choose a random word
+    var wordIndex = Random.Range(0, phrases.Length);
+    return phrases[wordIndex];
+  }
+
+}
+

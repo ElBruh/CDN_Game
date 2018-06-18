@@ -12,6 +12,6 @@ public class EnemyAttackEndSMB : StateMachineBehaviour
 
   override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
   {
-    GameObject.Find("CombatManager").GetComponent<CombatManager>().ResolveEnemyAttack();
+    GameObject.Find("ObstacleManager").GetComponent<CombatManager>().ResolveEnemyAttack();
   }
 }
