@@ -22,14 +22,8 @@ public class CombatManager : MonoBehaviour {
 
 
 	public float health = 100f;
-	
-	
-	public AudioClip win;
-  public AudioClip introSong;
-  public AudioSource source;
   public Camera cam;
-  public AudioSource EncounterMusic;
-  public AudioSource MainMusic;
+
 	public Canvas enemyBarPrefab;
 	
 	public Canvas healthBarV2;
@@ -37,23 +31,19 @@ public class CombatManager : MonoBehaviour {
   public WordList list;
 	
 	public GameObject tempEnemy;
-	
-	
 	public float damage = 0;
 	private float damageToGive;
   private GameObject hero;
   public CombatStates combatState;
   private WordDisplay wordDisplay;
-  //private bool changeMusic;
+  
+  public AudioManager music;
   
 
 	void Start(){
     //timer = timeleft;
     wordDisplay = GetComponent<WordDisplay>();
     combatState = CombatStates.OutofCombat;
-    /*We can decide when to start and end the intro music */
-    //MainMusic.clip = introSong;
-    //MainMusic.Play();
   }
   public void OnTimerExpired()
   {
@@ -68,24 +58,15 @@ public class CombatManager : MonoBehaviour {
     {
       SceneManager.LoadScene(0);
     }
-    //Debug.Log("Wrong Letter");
-    //falsh the screen red for a little
-    cam.backgroundColor = Color.red;
-
-    //cam.backgroundColor = Color.black;
   }
   public void OnTextCompleted()
   {
-    //KillEnemy();
     AddDamage();
-    //wordExists = false;
-    //NewWord();
   }
   void Update(){
     switch (combatState)
     {
       case CombatStates.InputSetup:
-        //changeMusic = true;
         wordDisplay.NewText(tempEnemy.transform, list.GetWord());
         combatState = CombatStates.TakingInput;
         break;
@@ -103,16 +84,6 @@ public class CombatManager : MonoBehaviour {
       default:
         break;
     }
-    /*if(changeMusic == true){
-      MainMusic.volume -= 1 * Time.deltaTime/2;
-      EncounterMusic.volume += 0.5f * Time.deltaTime/2;
-    }
-    else if (changeMusic == false){
-      MainMusic.volume += 0.5f * Time.deltaTime/2;
-      EncounterMusic.volume -= 1 * Time.deltaTime/2;
-    }*/
-    
-
   }
 
   void AddDamage(){
@@ -125,9 +96,7 @@ public class CombatManager : MonoBehaviour {
       combatState = CombatStates.HeroAttack;
     }
     else
-      wordDisplay.NewText(tempEnemy.transform, list.GetWord());
-		//Do something cool here, or call another class to do it
-		
+      wordDisplay.NewText(tempEnemy.transform, list.GetWord());		
 	}
 
 	void ChangeColor(){
@@ -136,8 +105,6 @@ public class CombatManager : MonoBehaviour {
 	}
 	public void ChangeToDead(){
     wordDisplay.Stop();	
-		source.clip = win;
-		source.Play();
 	}
 
 
@@ -146,9 +113,13 @@ public class CombatManager : MonoBehaviour {
     var levelOfRoom = GameObject.Find("TowerManager").GetComponent<LevelManager>().currentFloor;
     this.hero = hero;
     this.tempEnemy = enemy;
-    tempEnemy.GetComponent<Life>().life = 10 * levelOfRoom;
+    
+    SetEnemyHealth(tempEnemy.name, levelOfRoom);
+    
     healthBarV2 = Instantiate(enemyBarPrefab, new Vector3(tempEnemy.transform.position.x, tempEnemy.transform.position.y + 2f, tempEnemy.transform.position.z + 1.5f), Quaternion.Euler(0, -90, 0));
+    
     wordDisplay.Start(OnTextCompleted, OnTimerExpired, OnIncorrectLetter);
+    
     combatState = CombatStates.InputSetup;
   }
   public void ResolveEnemyAttack()
@@ -166,7 +137,7 @@ public class CombatManager : MonoBehaviour {
   }
   public void EnemyDeathCleanUp()
   {
-    //changeMusic = false;
+    music.EnemyDeadSound();
     GameObject.Find("Main Camera").GetComponent<FollowPlayer>().inCombat = false;
     Destroy(tempEnemy);
     combatState = CombatStates.OutofCombat;
@@ -191,6 +162,25 @@ public class CombatManager : MonoBehaviour {
       tempEnemy.GetComponent<Enemy>().Block();
     }
   }
+  public void SetEnemyHealth(string enemyName, int levelOfRoom)
+  {
+    var enemyLevel = 10;
+    switch(enemyName){
+      case "Mage(Clone)" :
+        enemyLevel = 15;
+        break;
+      case "Bat(Clone)" :
+        enemyLevel = 5;
+        break;
+      case "Skeleton(Clone)" :
+        enemyLevel = 20;
+        break;
+      default :
+        break;
+    }
+    var life = tempEnemy.GetComponent<Life>().life = enemyLevel * levelOfRoom;
+    //Debug.Log("Enemy Health: " + life);
+ }
   public void HeroHitByEnemy()
   {
     bool dead = false;
