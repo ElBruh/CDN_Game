@@ -9,7 +9,6 @@ public class Life : MonoBehaviour {
 
   public void Start()
   {
-    Debug.Log("Enemy Health: " + life);
   }
   /**
    * Returns true if dead. 

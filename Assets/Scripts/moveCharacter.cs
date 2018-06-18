@@ -51,12 +51,12 @@ public class moveCharacter : MonoBehaviour {
 
   public void StartMoving()
   {
-    moveSpeed = 2f;
+    moveSpeed = 4f;
     animator.SetTrigger(moveHash);
   }
   public void ApproachEnemy()
   {
-    moveSpeed = 1f;
+    moveSpeed = 2f;
     animator.SetTrigger(walkHash);
   }
   public void CombatStart(GameObject enemy)

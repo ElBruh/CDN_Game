@@ -15,7 +15,7 @@ public class WordList {
 							"pencil","canvas","peaceful","defiant","thick","lie","airport","amused","meat","handle","deafening","tightfisted","bomb","truck","occur","trot","wet",
 							"offer","blow","gabby","obtainable","applaud","end","rule","border","steam","grain","coach","excellent","jeans","order","aspiring","prepare","curtain",
 							"wealthy","remain","downtown","planes","abrasive","rich","tiny","scene","boat","quack","cub","clever","sheet","alert","need","ruddy","volcano","nose","knowing",
-							"book","load","uptight","heavy","melted","painful","butter","spot","bed","part","silver","habitual","hapless","poor","pull","heartbreaking","spark","tough","pass",
+							"book","load","uptight","heavy","melted","painful","butter","spot","bed","part","silver","habitual","hapless","poor","pull","spark","tough","pass",
 							"nappy","learn","zoo","trick","run","shoes","post","crow","stroke","whistle","stream","ambitious","chief","sugar","box","physical","vengeful","stale","cracker","wave",
 							"calculate","rain","island","scissors","argue","flat","tan","slave","lock","float","waste","soda","bite"};
 

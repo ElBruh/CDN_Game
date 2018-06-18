@@ -22,45 +22,36 @@ public class CombatManager : MonoBehaviour {
 
 
 	public float health = 100f;
-	public AudioClip tap;
-	public AudioClip badTap;
-	public AudioClip finish;
-	public AudioClip win;
-  public AudioClip introSong;
-	public AudioSource source;
-  public AudioSource EncounterMusic;
-  public AudioSource MainMusic;
+	
 	public Canvas enemyBarPrefab;
 	public TextMeshPro mTextPrefab;
-	public TextMeshPro mText;
-	public Canvas healthBarV2;
   private Animator animator;
-
-  public WordList list;
-	public Camera cam;
-	public GameObject tempEnemy;
 	private bool currentLetter = false;
 	public bool wordExists = false;
   public bool triggered = false;
 	public float timeleft = 10;
-	public float timer;
 	public float damage = 0;
 	private float damageToGive;
   //private bool currentWord = false;
   private GameObject hero;
   public CombatStates combatState;
   //private bool changeMusic;
-  
-
+  [HideInInspector]
+  public GameObject tempEnemy;
+  [HideInInspector]
+  public TextMeshPro mText;
+  [HideInInspector]
+  public Canvas healthBarV2;
+  [HideInInspector]
+  public WordList list;
+  [HideInInspector]
+  public Camera cam;
+  [HideInInspector]
+  public float timer;
+  public AudioManager music;
 	void Start(){
-    //InvokeRepeating("NewWord", 0, 3);
-    //NewWord();
-    //timer = timeleft;
     animator = GetComponent<Animator>();
     combatState = CombatStates.OutofCombat;
-    /*We can decide when to start and end the intro music */
-    //MainMusic.clip = introSong;
-    //MainMusic.Play();
   }
 	void Update(){
     switch (combatState)
@@ -73,14 +64,6 @@ public class CombatManager : MonoBehaviour {
         break;
 
       case CombatStates.TakingInput:
-        cam.backgroundColor = Color.black;
-
-        //mText.transform.position = new Vector3(enemy.transform.position.x, 1, enemy.transform.position.z);
-
-        //I want to get the keyboard strokes and compare them between the characters that
-        //exist in the current word (later on WORDS).
-
-
 
         if (wordExists == true)
         {
@@ -88,14 +71,8 @@ public class CombatManager : MonoBehaviour {
           timer -= Time.deltaTime;
           if (mText.text.Length == 0)
           {
-
-            source.clip = finish;
-            source.Play();
-
-            //KillEnemy();
+            music.FinishWord();
             AddDamage();
-            //wordExists = false;
-            //NewWord();
           }
 
           if (timer <= 0)
@@ -112,8 +89,7 @@ public class CombatManager : MonoBehaviour {
             }
             else
             {
-              source.clip = badTap;
-              source.Play();
+              music.BadTap();
               WrongLetter();
             }
 
@@ -123,8 +99,7 @@ public class CombatManager : MonoBehaviour {
           if (currentLetter == true)
           {
             mText.text = mText.text.Remove(0, 1);
-            source.clip = tap;
-            source.Play();
+            music.Tap();
             currentLetter = false;
           }
           //if the word no longer exists, it will spawn a new one
@@ -148,37 +123,18 @@ public class CombatManager : MonoBehaviour {
       default:
         break;
     }
-    /*if(changeMusic == true){
-      MainMusic.volume -= 1 * Time.deltaTime/2;
-      EncounterMusic.volume += 0.5f * Time.deltaTime/2;
-    }
-    else if (changeMusic == false){
-      MainMusic.volume += 0.5f * Time.deltaTime/2;
-      EncounterMusic.volume -= 1 * Time.deltaTime/2;
-    }*/
+    
     
 
   }
 	//will call the GetWord function from the WordList class to get a new word
 	public void NewWord(GameObject parent){
-		
-		//mText = GetComponent<TextMeshPro>();
-		//enemy = Instantiate(enemyPrefab);
 		tempEnemy = parent;
-    //if (GameObject.FindGameObjectWithTag("Hero").GetComponent<moveCharacter>().nextFloor == false)
-    //{
-      cam.GetComponent<FollowPlayer>().rotOffset.x = -6.51f;
-      mText = Instantiate(mTextPrefab, new Vector3(parent.transform.position.x, parent.transform.position.y + 1f, parent.transform.position.z), Quaternion.Euler(0, -90, 0));
-    //}
-    //else if (GameObject.FindGameObjectWithTag("Hero").GetComponent<moveCharacter>().nextFloor == true)
-    //{
-      //cam.GetComponent<FollowPlayer>().rotOffset.x = 6.51f;
-      //mText = Instantiate(mTextPrefab, new Vector3(parent.transform.position.x, parent.transform.position.y + 1f, parent.transform.position.z + 7), Quaternion.Euler(0, 90, 0));
-    //}
-    //new enemy
+  
+    mText = Instantiate(mTextPrefab, new Vector3(parent.transform.position.x, parent.transform.position.y + 1f, parent.transform.position.z), Quaternion.Euler(0, -90, 0));
+    
     if (wordExists == false){
 			healthBarV2 = Instantiate(enemyBarPrefab, new Vector3(mText.transform.position.x,mText.transform.position.y+1f,mText.transform.position.z+1.5f), Quaternion.Euler(0,-90,0));//Quaternion.Euler(0,-123.688f,0));
-			//healthBarV2.text = "aaaaaaaaaa";
 		}
 		mText.text = list.GetWord();
 	
@@ -197,14 +153,8 @@ public class CombatManager : MonoBehaviour {
 		
 	}
 
-	void ChangeColor(){
-		//Can set an active color for this word.
-		//mText.color = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
-	}
 	public void ChangeToDead(){
 		wordExists = false;		
-		source.clip = win;
-		source.Play();
 	}
 	void WrongLetter(){
 		GameObject.FindGameObjectWithTag("HitPointBar").GetComponent<ManageHitPoints>().Clear();
@@ -213,11 +163,6 @@ public class CombatManager : MonoBehaviour {
 		if(health <=0){
 			SceneManager.LoadScene(0);
 		}
-		//Debug.Log("Wrong Letter");
-		//falsh the screen red for a little
-		cam.backgroundColor = Color.red;
-		
-		//cam.backgroundColor = Color.black;
 	}
 
   public void CombatStart(GameObject hero, GameObject enemy)
@@ -225,7 +170,7 @@ public class CombatManager : MonoBehaviour {
     var levelOfRoom = GameObject.Find("TowerManager").GetComponent<LevelManager>().currentFloor;
     this.hero = hero;
     this.tempEnemy = enemy;
-    tempEnemy.GetComponent<Life>().life = 10 * levelOfRoom;
+    SetEnemyHealth(tempEnemy.name, levelOfRoom);
     combatState = CombatStates.InputSetup;
   }
   public void ResolveEnemyAttack()
@@ -243,11 +188,12 @@ public class CombatManager : MonoBehaviour {
   }
   public void EnemyDeathCleanUp()
   {
-    //changeMusic = false;
+    music.EnemyDeadSound();
     GameObject.Find("Main Camera").GetComponent<FollowPlayer>().inCombat = false;
     Destroy(tempEnemy);
     combatState = CombatStates.OutofCombat;
     hero.GetComponent<moveCharacter>().StartMoving();
+    music.RunSound();
   }
   public void EnemyHitByHero()
   {
@@ -267,6 +213,25 @@ public class CombatManager : MonoBehaviour {
       GameObject.FindGameObjectWithTag("HitPointBar").GetComponent<ManageHitPoints>().Clear();
       tempEnemy.GetComponent<Enemy>().Block();
     }
+  }
+
+  public void SetEnemyHealth(string enemyName, int levelOfRoom){
+    var enemyLevel = 10;
+    switch(enemyName){
+      case "Mage(Clone)" :
+        enemyLevel = 15;
+        break;
+      case "Bat(Clone)" :
+        enemyLevel = 5;
+        break;
+      case "Skeleton(Clone)" :
+        enemyLevel = 20;
+        break;
+      default :
+        break;
+    }
+    var life = tempEnemy.GetComponent<Life>().life = enemyLevel * levelOfRoom;
+    Debug.Log("Enemy Health: " + life);
   }
   public void HeroHitByEnemy()
   {
