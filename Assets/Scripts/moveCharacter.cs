@@ -44,8 +44,9 @@ public class moveCharacter : MonoBehaviour {
 			Debug.Log(col.collider.tag);
 		}
 		if(col.collider.tag == "Ladder"){
-			moveNext = true;
-		}
+      //moveNext = true;
+      LadderStart(col.collider.gameObject);
+    }
 		
 	}
 
@@ -67,6 +68,17 @@ public class moveCharacter : MonoBehaviour {
     GameObject.Find("Main Camera").GetComponent<FollowPlayer>().inCombat = true;
   }
 
+  public void LadderStart(GameObject ladder)
+  {
+    moveSpeed = 0f;
+    animator.SetTrigger(combatHash);
+    GameObject.Find("ObstacleManager").GetComponent<LadderManager>().LadderStart(this.gameObject, ladder);
+  }
+
+  public void Climb()
+  {
+
+  }
   public void Attack()
   {
     Debug.Log("Performing attack!");

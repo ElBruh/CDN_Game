@@ -13,6 +13,7 @@ public class WordDisplay : MonoBehaviour {
   public bool wordExists = false;
   public float timer;
   public float timeleft = 10;
+  private bool useTimer = true;
   public Camera cam;
   public AudioClip tap;
   public AudioClip badTap;
@@ -33,7 +34,16 @@ public class WordDisplay : MonoBehaviour {
     this.textCompletedCallback = textCompletedCallback;
     this.timerExpiredCallback = timerExpiredCallback;
     this.incorrectLetterCallback = incorrectLetterCallback;
+    if (timerLength > 0)
+    {
+      useTimer = true;  
+    }
+    else
+    {
+      useTimer = false;
+    }
     timer = timeleft = timerLength;
+
   }
 
   public void Stop()
@@ -57,8 +67,8 @@ public class WordDisplay : MonoBehaviour {
 
     if (wordExists == true)
     {
-
-      timer -= Time.deltaTime;
+      if(useTimer)
+        timer -= Time.deltaTime;
       if (mText.text.Length == 0)
       {
         source.clip = finish;
@@ -66,7 +76,7 @@ public class WordDisplay : MonoBehaviour {
         textCompletedCallback();
       }
 
-      if (timer <= 0)
+      if (useTimer && timer <= 0)
       {
         mText.text = "";
         wordExists = false;
