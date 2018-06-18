@@ -38,7 +38,7 @@ public class LevelManager : MonoBehaviour {
   
   public float GetCurrentFloorY()
   {
-    GameObject floor = floors[currentFloor];
+    GameObject floor = floors[0];
     RandomFloor rf = floor.GetComponent<RandomFloor>();
     return rf.GetFloorY;
   }

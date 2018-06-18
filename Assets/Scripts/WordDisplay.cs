@@ -25,7 +25,7 @@ public class WordDisplay : MonoBehaviour {
   private IncorrectLetter incorrectLetterCallback;
   public AudioManager music;
 
-  public void Start(WordCompleted textCompletedCallback, TimerExpired timerExpiredCallback = null, IncorrectLetter incorrectLetterCallback = null, float timerLength=10f)
+  public void StartDisplay(WordCompleted textCompletedCallback, TimerExpired timerExpiredCallback = null, IncorrectLetter incorrectLetterCallback = null, float timerLength=10f)
   {
     this.textCompletedCallback = textCompletedCallback;
     this.timerExpiredCallback = timerExpiredCallback;
@@ -42,7 +42,7 @@ public class WordDisplay : MonoBehaviour {
 
   }
 
-  public void Stop()
+  public void StopDisplay()
   {
     textCompletedCallback = null;
     timerExpiredCallback = null;

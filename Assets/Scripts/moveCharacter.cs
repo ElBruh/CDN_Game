@@ -9,6 +9,8 @@ public class moveCharacter : MonoBehaviour {
 	public bool moveNext = false;
 	public Vector3 right;
 	public Vector3 left;
+  private bool climbing;
+  private int climbingIterations;
   private Animator animator;
   private int moveHash = Animator.StringToHash("Move");
   private int walkHash = Animator.StringToHash("GuardedWalk");
@@ -16,11 +18,13 @@ public class moveCharacter : MonoBehaviour {
   private int dieHash = Animator.StringToHash("Die");
   private int blockHash = Animator.StringToHash("Block");
   private int attackHash = Animator.StringToHash("Attack");
+  private int climbHash = Animator.StringToHash("Climb");
   // Update is called once per frame
   void Start(){
 		Debug.Log(transform.position);
     animator = GetComponent<Animator>();
     moveSpeed = 0f;
+    climbingIterations = 0;
     Invoke("StartMoving", 3f);
 	}
   public void HitEnemy()
@@ -28,12 +32,11 @@ public class moveCharacter : MonoBehaviour {
     GameObject.Find("ObstacleManager").GetComponent<CombatManager>().EnemyHitByHero();
   }
   void FixedUpdate () {
-		if (moveNext == true){
-			Next();
-			GameObject.Find("TowerManager").GetComponent<LevelManager>().LevelUp();
-		}
-
-		if(nextFloor == true){
+    if(climbing)
+    {
+      transform.Translate(new Vector3(0,0.5f,0) * Time.deltaTime, Space.World);
+    }
+		else if(nextFloor == true){
 			transform.Translate  (left * Time.deltaTime * moveSpeed, Space.World);
 		}
 		else
@@ -49,7 +52,16 @@ public class moveCharacter : MonoBehaviour {
     }
 		
 	}
-
+  public void ClimbingIter()
+  {
+    climbingIterations++;
+    if(climbingIterations == 1)
+    {
+      climbing = false;
+      climbingIterations = 0;
+      GameObject.Find("ObstacleManager").GetComponent<LadderManager>().FloorTransition();
+    }
+  }
   public void StartMoving()
   {
     moveSpeed = 4f;
@@ -77,7 +89,8 @@ public class moveCharacter : MonoBehaviour {
 
   public void Climb()
   {
-
+    climbing = true;
+    animator.SetTrigger(climbHash);
   }
   public void Attack()
   {
@@ -96,7 +109,10 @@ public class moveCharacter : MonoBehaviour {
   }
   public void Next(){
 		Debug.Log(nextFloor);
-    transform.Translate(new Vector3(0, 10, 0), Space.World);
+    GameObject.Find("TowerManager").GetComponent<LevelManager>().LevelUp();
+    animator.SetTrigger(combatHash);
+    var floorY = GameObject.Find("TowerManager").GetComponent<LevelManager>().GetCurrentFloorY();
+    transform.position = new Vector3(transform.position.x, floorY, transform.position.z);
     if (nextFloor == true){
       transform.Rotate(new Vector3(0, 180, 0));
 			nextFloor = false;
@@ -106,6 +122,7 @@ public class moveCharacter : MonoBehaviour {
 			nextFloor = true;
 		}
 		Debug.Log(transform.position);
-		moveNext = false;
-	}
+    
+    Invoke("StartMoving", 1f);
+  }
 }

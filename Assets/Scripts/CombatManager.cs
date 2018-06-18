@@ -92,7 +92,7 @@ public class CombatManager : MonoBehaviour {
 		bool maxed = GameObject.FindGameObjectWithTag("HitPointBar").GetComponent<ManageHitPoints>().BuildUp(damage);
     if (maxed)
     {
-      wordDisplay.Stop();
+      wordDisplay.StopDisplay();
       combatState = CombatStates.HeroAttack;
     }
     else
@@ -104,7 +104,7 @@ public class CombatManager : MonoBehaviour {
 		//mText.color = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
 	}
 	public void ChangeToDead(){
-    wordDisplay.Stop();	
+    wordDisplay.StopDisplay();	
 	}
 
 
@@ -118,7 +118,7 @@ public class CombatManager : MonoBehaviour {
     
     healthBarV2 = Instantiate(enemyBarPrefab, new Vector3(tempEnemy.transform.position.x, tempEnemy.transform.position.y + 2f, tempEnemy.transform.position.z + 1.5f), Quaternion.Euler(0, -90, 0));
     
-    wordDisplay.Start(OnTextCompleted, OnTimerExpired, OnIncorrectLetter);
+    wordDisplay.StartDisplay(OnTextCompleted, OnTimerExpired, OnIncorrectLetter);
     
     combatState = CombatStates.InputSetup;
   }

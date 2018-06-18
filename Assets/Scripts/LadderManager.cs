@@ -11,7 +11,7 @@ public enum LadderStates
   TakingInput,
   ApproachingLadder,
   ClimbingLadder,
-  Fade,
+  Transition,
   NextFloor,
   Away
 }
@@ -25,6 +25,7 @@ public class LadderManager : MonoBehaviour
   private GameObject hero;
   private GameObject ladder;
   public LadderStates ladderState;
+  public Image blackScreen;
   private WordDisplay wordDisplay;
 
 
@@ -37,7 +38,9 @@ public class LadderManager : MonoBehaviour
 
   public void OnTextCompleted()
   {
-    wordDisplay.Stop();
+    wordDisplay.StopDisplay();
+    ladderState = LadderStates.ClimbingLadder;
+    hero.GetComponent<moveCharacter>().Climb();
   }
   void Update()
   {
@@ -68,8 +71,31 @@ public class LadderManager : MonoBehaviour
   {
     this.hero = hero;
     this.ladder = ladder;
-    wordDisplay.Start(OnTextCompleted, timerLength: 0f);
+    wordDisplay.StartDisplay(OnTextCompleted, timerLength: 0f);
     ladderState = LadderStates.InputSetup;
+  }
+
+  public void FloorTransition()
+  {
+    ladderState = LadderStates.Transition;
+    FadeToBlack();
+
+  }
+
+  void FadeToBlack()
+  {
+    blackScreen.color = Color.black;
+    blackScreen.canvasRenderer.SetAlpha(0.0f);
+    blackScreen.CrossFadeAlpha(1.0f, 0.5f, false);
+    Invoke("FadeFromBlack", 1f);
+  }
+
+  void FadeFromBlack()
+  {
+    hero.GetComponent<moveCharacter>().Next();
+    blackScreen.color = Color.black;
+    blackScreen.canvasRenderer.SetAlpha(1.0f);
+    blackScreen.CrossFadeAlpha(0.0f, 0.5f, false);
   }
 
 }

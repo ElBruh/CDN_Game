@@ -20,7 +20,7 @@ public class RandomFloor : MonoBehaviour {
     rf.rooms = new List<GameObject>();
     for (int i = 0; i < rf.roomCount; i++)
     {
-      GameObject room = RandomRoom.Create(go, i, floorNum, rf.roomCount, hasEnemy:false);
+      GameObject room = RandomRoom.Create(go, i, floorNum, rf.roomCount, hasEnemy:true);
       rf.rooms.Add(room);
     }
 
@@ -30,7 +30,7 @@ public class RandomFloor : MonoBehaviour {
     return go;
   }
 
-  public float GetFloorY { get { return (floorNum - 1) * floorHeight; } }
+  public float GetFloorY { get { Debug.Log(floorNum); return (floorNum - 1) * floorHeight; } }
   public int GetFloorNum { get { return floorNum; } }
 
   // Use this for initialization
