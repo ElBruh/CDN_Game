@@ -9,6 +9,7 @@ public class AudioManager: MonoBehaviour{
 	public AudioClip finish;
 	public AudioClip win;
  	public AudioClip introSong;
+	public AudioClip gameMusic;
 	public AudioClip swordClash;
 	public AudioClip block;
 	public AudioClip fireSound;
@@ -18,23 +19,28 @@ public class AudioManager: MonoBehaviour{
 	public AudioSource EnemyAttack;
   	//public AudioSource EncounterMusic;
   	public AudioSource MainMusic;
+	private float timeToPlay = 15f;
+	private bool playGameMusic = false;
 	// Use this for initialization
 	void Start () {
 		/*We can decide when to start and end the intro music */
-		//MainMusic.clip = introSong;
-    	//MainMusic.Play();
+		MainMusic.clip = introSong;
+    	MainMusic.Play();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		/*if(changeMusic == true){
-    		MainMusic.volume -= 1 * Time.deltaTime/2;
-    		EncounterMusic.volume += 0.5f * Time.deltaTime/2;
-    	}
-    	else if (changeMusic == false){
-      		MainMusic.volume += 0.5f * Time.deltaTime/2;
-      		EncounterMusic.volume -= 1 * Time.deltaTime/2;
-    	}*/
+		timeToPlay -= Time.deltaTime;
+		if (timeToPlay <- 0 && playGameMusic == false){
+			MainMusic.volume-=0.01f;
+			if(MainMusic.volume <= 0.001f){
+				MainMusic.Stop();
+				MainMusic.clip = gameMusic;
+				MainMusic.volume = 1f;
+				MainMusic.Play();
+				playGameMusic = true;
+			}
+		}
 	}
 	public void Tap(){
 		/*Finished Letter */
@@ -71,9 +77,6 @@ public class AudioManager: MonoBehaviour{
 	public void Block(){
 		source.clip = block;
 		source.Play();
-	}
-	public void BlockSound(){
-
 	}
 	public void ClimbSound(){
 
