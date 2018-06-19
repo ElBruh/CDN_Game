@@ -21,8 +21,8 @@ public class RandomSpawn : MonoBehaviour {
 		offsetz = -30;
 		offsetXLimit = 0f;
 		offsetZLimit = 25;
-		InvokeRepeating("TreeSpawn", 0, 0.01f);
-		InvokeRepeating("GroundSpawn",0,0.0001f);
+		InvokeRepeating("TreeSpawn", 0, 0.001f);
+		InvokeRepeating("GroundSpawn",0,0.001f);
 	}
 	
 	// Update is called once per frame
