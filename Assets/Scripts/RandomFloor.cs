@@ -9,6 +9,7 @@ public class RandomFloor : MonoBehaviour {
   public int roomCount;
   public int floorNum;
   public float floorHeight;
+  private float towerOffset = 5;
 
   public static GameObject Create(int floorNum, int numEnemies)
   {
@@ -30,7 +31,7 @@ public class RandomFloor : MonoBehaviour {
     return go;
   }
 
-  public float GetFloorY { get { Debug.Log(floorNum); return (floorNum - 1) * floorHeight; } }
+  public float GetFloorY { get { Debug.Log(floorNum); return (floorNum - 1) * floorHeight + towerOffset; } }
   public int GetFloorNum { get { return floorNum; } }
 
   // Use this for initialization

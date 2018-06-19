@@ -17,7 +17,6 @@ public class LevelManager : MonoBehaviour {
   private List<GameObject> floors;
   // Use this for initialization
   void Start () {
-    Instantiate(player, new Vector3((35.9f),0f,0f), Quaternion.Euler(new Vector3(0.0f, -90.0f, 0.0f)));
     currentFloor = 1;
     lastFloor = 0;
     floors = new List<GameObject>();
@@ -26,7 +25,8 @@ public class LevelManager : MonoBehaviour {
       lastFloor += 1;
       floors.Add(RandomFloor.Create(lastFloor, 4));
     }
-	}
+    Instantiate(player, new Vector3((35.9f), GetCurrentFloorY(), 0f), Quaternion.Euler(new Vector3(0.0f, -90.0f, 0.0f)));
+  }
 	
 	// Update is called once per frame
 	void Update () {
