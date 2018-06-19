@@ -29,7 +29,7 @@ public class moveCharacter : MonoBehaviour {
     moveSpeed = 0f;
     climbingIterations = 0;
     player = GameObject.FindGameObjectWithTag("Hero");
-    Invoke("StartMoving", 15f);
+    Invoke("StartMoving", 1f);
 	}
   public void HitEnemy()
   {

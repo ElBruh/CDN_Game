@@ -15,6 +15,7 @@ public class LevelManager : MonoBehaviour {
   private int lastFloor;
   public int currentFloor;
   private List<GameObject> floors;
+  //public GameObject[] trees;
   // Use this for initialization
   void Start () {
     currentFloor = 1;
