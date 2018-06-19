@@ -46,7 +46,7 @@ public class moveCharacter : MonoBehaviour {
 		else
 			transform.Translate  (right * Time.deltaTime * moveSpeed, Space.World);
     if(climbStairs == true && player.transform.position.y <= 5){
-      player.transform.Translate(0,2.3f * Time.deltaTime,0);
+      player.transform.Translate(0,2.5f * Time.deltaTime,0);
     }
 	}
 
