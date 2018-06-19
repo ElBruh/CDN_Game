@@ -9,6 +9,7 @@ TagManager:
   - Ladder
   - EnemyHealth
   - HitPointBar
+  - Stairs
   layers:
   - Default
   - TransparentFX

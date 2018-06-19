@@ -20,13 +20,16 @@ public class moveCharacter : MonoBehaviour {
   private int attackHash = Animator.StringToHash("Attack");
   private int climbLeftHash = Animator.StringToHash("ClimbLeft");
   private int climbRightHash = Animator.StringToHash("ClimbRight");
+  private GameObject player;
+  private bool climbStairs = false;
   // Update is called once per frame
   void Start(){
 		Debug.Log(transform.position);
     animator = GetComponent<Animator>();
     moveSpeed = 0f;
     climbingIterations = 0;
-    Invoke("StartMoving", 3f);
+    player = GameObject.FindGameObjectWithTag("Hero");
+    Invoke("StartMoving", 1f);
 	}
   public void HitEnemy()
   {
@@ -42,7 +45,11 @@ public class moveCharacter : MonoBehaviour {
 		}
 		else
 			transform.Translate  (right * Time.deltaTime * moveSpeed, Space.World);
+    if(climbStairs == true && player.transform.position.y <= 5){
+      player.transform.Translate(0,2.3f * Time.deltaTime,0);
+    }
 	}
+
 	public void OnCollisionEnter(Collision col){
 		if(col.collider.tag == "Enemy"){
 			Debug.Log(col.collider.tag);
@@ -51,7 +58,9 @@ public class moveCharacter : MonoBehaviour {
       //moveNext = true;
       LadderStart(col.collider.gameObject);
     }
-		
+    if (col.gameObject.tag == "Stairs"){
+      climbStairs = true;
+    }
 	}
   public void ClimbingIter()
   {
