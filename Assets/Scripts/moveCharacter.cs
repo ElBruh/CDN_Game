@@ -18,7 +18,8 @@ public class moveCharacter : MonoBehaviour {
   private int dieHash = Animator.StringToHash("Die");
   private int blockHash = Animator.StringToHash("Block");
   private int attackHash = Animator.StringToHash("Attack");
-  private int climbHash = Animator.StringToHash("Climb");
+  private int climbLeftHash = Animator.StringToHash("ClimbLeft");
+  private int climbRightHash = Animator.StringToHash("ClimbRight");
   // Update is called once per frame
   void Start(){
 		Debug.Log(transform.position);
@@ -90,7 +91,11 @@ public class moveCharacter : MonoBehaviour {
   public void Climb()
   {
     climbing = true;
-    animator.SetTrigger(climbHash);
+    FloorDirections direction = GameObject.Find("TowerManager").GetComponent<LevelManager>().GetCurrentFloorDirection();
+    if (direction == FloorDirections.Left)
+      animator.SetTrigger(climbLeftHash);
+    else
+      animator.SetTrigger(climbRightHash);
   }
   public void Attack()
   {

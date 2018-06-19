@@ -531,6 +531,48 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3fb3387483f32864580cd4c70d420f72, type: 2}
   m_IsPrefabParent: 0
+--- !u!1001 &1229783072
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4876629829872070, guid: 0f587fc9e5a88f94ea5784424c3883e9, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 40.93
+      objectReference: {fileID: 0}
+    - target: {fileID: 4876629829872070, guid: 0f587fc9e5a88f94ea5784424c3883e9, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -1.03
+      objectReference: {fileID: 0}
+    - target: {fileID: 4876629829872070, guid: 0f587fc9e5a88f94ea5784424c3883e9, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -2.1096618
+      objectReference: {fileID: 0}
+    - target: {fileID: 4876629829872070, guid: 0f587fc9e5a88f94ea5784424c3883e9, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4876629829872070, guid: 0f587fc9e5a88f94ea5784424c3883e9, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4876629829872070, guid: 0f587fc9e5a88f94ea5784424c3883e9, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4876629829872070, guid: 0f587fc9e5a88f94ea5784424c3883e9, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4876629829872070, guid: 0f587fc9e5a88f94ea5784424c3883e9, type: 2}
+      propertyPath: m_RootOrder
+      value: 11
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 0f587fc9e5a88f94ea5784424c3883e9, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &1263485563
 GameObject:
   m_ObjectHideFlags: 0
@@ -1436,6 +1478,12 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1852719815}
+--- !u!114 &1965781683 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114338269856948396, guid: 57b35c3d5ce294440b2936734efb990d,
+    type: 2}
+  m_PrefabInternal: {fileID: 2100337233}
+  m_Script: {fileID: 1453722849, guid: 89f0137620f6af44b9ba852b4190e64e, type: 3}
 --- !u!1001 &1975498151
 Prefab:
   m_ObjectHideFlags: 0
@@ -1589,6 +1637,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 4929505}
+  floorText: {fileID: 1965781683}
   ladderState: 0
   blackScreen: {fileID: 1659310295}
 --- !u!1001 &2100337233
@@ -1691,6 +1740,16 @@ Prefab:
     - target: {fileID: 1119028252841750, guid: 57b35c3d5ce294440b2936734efb990d, type: 2}
       propertyPath: m_Name
       value: BlackFadeCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 114338269856948396, guid: 57b35c3d5ce294440b2936734efb990d,
+        type: 2}
+      propertyPath: m_havePropertiesChanged
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114338269856948396, guid: 57b35c3d5ce294440b2936734efb990d,
+        type: 2}
+      propertyPath: m_isInputParsingRequired
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 57b35c3d5ce294440b2936734efb990d, type: 2}

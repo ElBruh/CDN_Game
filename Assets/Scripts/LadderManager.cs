@@ -22,6 +22,7 @@ public class LadderManager : MonoBehaviour
   public Camera cam;
 
   public EncouragementsList encouragements;
+  public TextMeshProUGUI floorText;
   private GameObject hero;
   private GameObject ladder;
   public LadderStates ladderState;
@@ -59,14 +60,6 @@ public class LadderManager : MonoBehaviour
 
   }
 
-
-  void ChangeColor()
-  {
-    //Can set an active color for this word.
-    //mText.color = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
-  }
-
-
   public void LadderStart(GameObject hero, GameObject ladder)
   {
     this.hero = hero;
@@ -87,6 +80,7 @@ public class LadderManager : MonoBehaviour
     blackScreen.color = Color.black;
     blackScreen.canvasRenderer.SetAlpha(0.0f);
     blackScreen.CrossFadeAlpha(1.0f, 0.5f, false);
+    Invoke("FadeInFloorText", 1.5f);
     Invoke("FadeFromBlack", 1f);
   }
 
@@ -96,6 +90,19 @@ public class LadderManager : MonoBehaviour
     blackScreen.color = Color.black;
     blackScreen.canvasRenderer.SetAlpha(1.0f);
     blackScreen.CrossFadeAlpha(0.0f, 0.5f, false);
+  }
+  void FadeInFloorText()
+  {
+    floorText.text = "Floor " + GameObject.Find("TowerManager").GetComponent<LevelManager>().currentFloor.ToString();
+    floorText.canvasRenderer.SetAlpha(0.0f);
+    floorText.CrossFadeAlpha(1.0f, 0.5f, false);
+    Invoke("FadeOutFloorText", 1f);
+  }
+  void FadeOutFloorText()
+  {
+    //floorText.text = "";
+    floorText.canvasRenderer.SetAlpha(1.0f);
+    floorText.CrossFadeAlpha(0.0f, 0.5f, false);
   }
 
 }
