@@ -9,9 +9,13 @@ public class AudioManager: MonoBehaviour{
 	public AudioClip finish;
 	public AudioClip win;
  	public AudioClip introSong;
+	public AudioClip swordClash;
+	public AudioClip block;
+	public AudioClip fireSound;
 	
 	public AudioClip runSound;
 	public AudioSource source;
+	public AudioSource EnemyAttack;
   	//public AudioSource EncounterMusic;
   	public AudioSource MainMusic;
 	// Use this for initialization
@@ -58,10 +62,15 @@ public class AudioManager: MonoBehaviour{
 		//source.Play();
 	}
 	public void SneakSound(){
-
+		
 	}
-	public void SwingSound(){
-
+	public void SwordClash(){
+		source.clip = swordClash;
+		source.Play();
+	}
+	public void Block(){
+		source.clip = block;
+		source.Play();
 	}
 	public void BlockSound(){
 
@@ -70,6 +79,7 @@ public class AudioManager: MonoBehaviour{
 
 	}
 	public void FireSound(){
-
+		EnemyAttack.clip = fireSound;
+		EnemyAttack.Play();
 	}
 }

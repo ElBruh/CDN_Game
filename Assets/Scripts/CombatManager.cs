@@ -124,6 +124,7 @@ public class CombatManager : MonoBehaviour {
   }
   public void ResolveEnemyAttack()
   {
+    //music.FireSound();
     Debug.Log("Resolving enemy attack");
     bool dead = false;
     if (dead)
@@ -145,7 +146,9 @@ public class CombatManager : MonoBehaviour {
   }
   public void EnemyHitByHero()
   {
+    music.SwordClash();
     bool dead = tempEnemy.GetComponent<Life>().TakeDamage(damageToGive);
+    damageToGive = 0;
     if (dead)
     {
       GameObject.FindGameObjectWithTag("HitPointBar").GetComponent<ManageHitPoints>().Clear();
@@ -183,6 +186,10 @@ public class CombatManager : MonoBehaviour {
  }
   public void HeroHitByEnemy()
   {
+    if(tempEnemy.name == "Mage(Clone)"){
+      music.FireSound();
+    }
+    
     bool dead = false;
     if (dead)
     {
@@ -190,6 +197,7 @@ public class CombatManager : MonoBehaviour {
     }
     else
     {
+      music.Block();
       hero.GetComponent<moveCharacter>().Block();
     }
   }
