@@ -706,6 +706,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 114143885881525190, guid: 3fb3387483f32864580cd4c70d420f72,
+        type: 2}
+      propertyPath: dayNight
+      value: 
+      objectReference: {fileID: 1634724525}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3fb3387483f32864580cd4c70d420f72, type: 2}
   m_IsPrefabParent: 0
@@ -1702,7 +1707,7 @@ Prefab:
     - target: {fileID: 114007998348837556, guid: 9c70a6dd58e87154e88d850ac672f734,
         type: 2}
       propertyPath: treeLimit
-      value: 30
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 114007998348837556, guid: 9c70a6dd58e87154e88d850ac672f734,
         type: 2}
