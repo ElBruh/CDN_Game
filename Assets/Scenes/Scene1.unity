@@ -514,7 +514,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &592667661
 GameObject:
@@ -605,6 +605,7 @@ MonoBehaviour:
   finish: {fileID: 8300000, guid: b95443d426ad0f34a96f6cce8ef7c93d, type: 3}
   win: {fileID: 8300000, guid: 505db3c3b79645e4db1381bc593aefb8, type: 3}
   introSong: {fileID: 8300000, guid: cf11af53ec920fa4abc487ae9c01f45d, type: 3}
+  gameMusic: {fileID: 8300000, guid: 3f68b9d9296c0a549a74754af4d99b93, type: 3}
   swordClash: {fileID: 8300000, guid: 35dd53c64d185704abd8aa51e8dab44f, type: 3}
   block: {fileID: 8300000, guid: 44de071c9cf8be54e9594649df660a57, type: 3}
   fireSound: {fileID: 8300000, guid: 08d0b1699210def45ac7f38f56d42f82, type: 3}
