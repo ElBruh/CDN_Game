@@ -8,6 +8,7 @@ public class WordDisplay : MonoBehaviour {
 
   public TextMeshPro mTextPrefab;
   public TextMeshPro mText;
+  private TextMeshPro pText;
 
   public bool wordExists = false;
   public float timer;
@@ -89,7 +90,10 @@ public class WordDisplay : MonoBehaviour {
       //If the current pressed key is the first letter of a word, it will be deleted
       if (currentLetter == true)
       {
-        mText.text = mText.text.Remove(0, 1);
+        pText.text = mText.text;
+        //mText.text = mText.text.Remove(0, 1);
+        pText.color = Color.red;
+        mText.text = mText.text.Replace(mText.text[0],pText.text[0]);
         
         currentLetter = false;
       }
