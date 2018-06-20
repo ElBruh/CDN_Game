@@ -26,7 +26,7 @@ public class AudioManager: MonoBehaviour{
 		/*We can decide when to start and end the intro music */
 		MainMusic.clip = introSong;
     	MainMusic.Play();
-		timeToPlay = 30f;
+		timeToPlay = 100000f;
 	}
 	
 	// Update is called once per frame
