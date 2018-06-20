@@ -19,13 +19,14 @@ public class AudioManager: MonoBehaviour{
 	public AudioSource EnemyAttack;
   	//public AudioSource EncounterMusic;
   	public AudioSource MainMusic;
-	private float timeToPlay = 15f;
+	public float timeToPlay;
 	private bool playGameMusic = false;
 	// Use this for initialization
 	void Start () {
 		/*We can decide when to start and end the intro music */
 		MainMusic.clip = introSong;
     	MainMusic.Play();
+		timeToPlay = 30f;
 	}
 	
 	// Update is called once per frame
@@ -41,6 +42,9 @@ public class AudioManager: MonoBehaviour{
 				playGameMusic = true;
 			}
 		}
+	}
+	public void StartGame(){
+		timeToPlay = 15f;
 	}
 	public void Tap(){
 		/*Finished Letter */

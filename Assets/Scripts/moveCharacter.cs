@@ -29,7 +29,8 @@ public class moveCharacter : MonoBehaviour {
     moveSpeed = 0f;
     climbingIterations = 0;
     player = GameObject.FindGameObjectWithTag("Hero");
-    Invoke("StartMoving", 1f);
+    //Invoke("StartMoving", 0f);
+    MenuMoving();
 	}
   public void HitEnemy()
   {
@@ -75,6 +76,9 @@ public class moveCharacter : MonoBehaviour {
   public void StartMoving()
   {
     moveSpeed = 4f;
+    animator.SetTrigger(moveHash);
+  }
+  public void MenuMoving(){
     animator.SetTrigger(moveHash);
   }
   public void ApproachEnemy()
