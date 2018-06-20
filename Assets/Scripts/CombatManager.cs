@@ -142,6 +142,7 @@ public class CombatManager : MonoBehaviour {
     GameObject.Find("Main Camera").GetComponent<FollowPlayer>().inCombat = false;
     Destroy(tempEnemy);
     combatState = CombatStates.OutofCombat;
+    hero.GetComponent<moveCharacter>().moveSpeed = 4;
     hero.GetComponent<moveCharacter>().StartMoving();
   }
   public void EnemyHitByHero()

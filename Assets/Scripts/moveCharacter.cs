@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class moveCharacter : MonoBehaviour {
 
-	public float moveSpeed = 4f;
+	public float moveSpeed = 0f;
 	public bool nextFloor = false;
 	public bool moveNext = false;
 	public Vector3 right;
@@ -29,8 +29,7 @@ public class moveCharacter : MonoBehaviour {
     moveSpeed = 0f;
     climbingIterations = 0;
     player = GameObject.FindGameObjectWithTag("Hero");
-    //Invoke("StartMoving", 0f);
-    MenuMoving();
+    Invoke("StartMoving", 0.5f);
 	}
   public void HitEnemy()
   {
@@ -75,10 +74,6 @@ public class moveCharacter : MonoBehaviour {
   }
   public void StartMoving()
   {
-    moveSpeed = 4f;
-    //animator.SetTrigger(moveHash);
-  }
-  public void MenuMoving(){
     animator.SetTrigger(moveHash);
   }
   public void ApproachEnemy()

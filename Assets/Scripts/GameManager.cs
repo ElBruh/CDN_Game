@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour {
 		healthBar.enabled = true;
 		blackFade.enabled = true;
 		Cursor.visible = false;
-		GameObject.FindGameObjectWithTag("Hero").GetComponent<moveCharacter>().StartMoving();
+		GameObject.FindGameObjectWithTag("Hero").GetComponent<moveCharacter>().moveSpeed = 4;
 		trees = GameObject.FindGameObjectsWithTag("Tree");
 		foreach(GameObject tree in trees){
 			tree.GetComponent<MovePiece>().StopMovingPiece();
