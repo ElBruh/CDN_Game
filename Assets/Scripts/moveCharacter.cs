@@ -76,7 +76,7 @@ public class moveCharacter : MonoBehaviour {
   public void StartMoving()
   {
     moveSpeed = 4f;
-    animator.SetTrigger(moveHash);
+    //animator.SetTrigger(moveHash);
   }
   public void MenuMoving(){
     animator.SetTrigger(moveHash);
