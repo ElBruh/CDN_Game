@@ -9,6 +9,7 @@ public class WordDisplay : MonoBehaviour {
   public TextMeshPro mTextPrefab;
   public TextMeshPro mText;
   private TextMeshPro pText;
+  private int letter;
 
   public bool wordExists = false;
   public float timer;
@@ -26,6 +27,10 @@ public class WordDisplay : MonoBehaviour {
   private IncorrectLetter incorrectLetterCallback;
   public AudioManager music;
 
+
+  void Start(){
+    //letter = 0;
+  }
   public void StartDisplay(WordCompleted textCompletedCallback, TimerExpired timerExpiredCallback = null, IncorrectLetter incorrectLetterCallback = null, float timerLength=10f)
   {
     this.textCompletedCallback = textCompletedCallback;
@@ -90,11 +95,7 @@ public class WordDisplay : MonoBehaviour {
       //If the current pressed key is the first letter of a word, it will be deleted
       if (currentLetter == true)
       {
-        pText.text = mText.text;
-        //mText.text = mText.text.Remove(0, 1);
-        pText.color = Color.red;
-        mText.text = mText.text.Replace(mText.text[0],pText.text[0]);
-        
+        mText.text = mText.text.Remove(0,1);
         currentLetter = false;
       }
       //if the word no longer exists, it will spawn a new one

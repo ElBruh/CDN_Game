@@ -743,6 +743,11 @@ Prefab:
       propertyPath: blackFade
       value: 
       objectReference: {fileID: 1325568890}
+    - target: {fileID: 114143885881525190, guid: 3fb3387483f32864580cd4c70d420f72,
+        type: 2}
+      propertyPath: cam
+      value: 
+      objectReference: {fileID: 4929505}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3fb3387483f32864580cd4c70d420f72, type: 2}
   m_IsPrefabParent: 0
