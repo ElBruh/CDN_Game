@@ -10,6 +10,7 @@ public class moveCharacter : MonoBehaviour {
 	public Vector3 right;
 	public Vector3 left;
   public GameObject popup;
+  public ParticleSystem sliceEffect;
   private bool climbing;
   private int climbingIterations;
   private Animator animator;
@@ -22,10 +23,17 @@ public class moveCharacter : MonoBehaviour {
   private int climbLeftHash = Animator.StringToHash("ClimbLeft");
   private int climbRightHash = Animator.StringToHash("ClimbRight");
   private bool climbStairs = false;
+  private Transform sliceParent;
+  private bool attacking;
+  private float sliceSpeed = 1000f;
+  private Quaternion attackEndRotation;
   // Update is called once per frame
   void Start(){
 		Debug.Log(transform.position);
     animator = GetComponent<Animator>();
+    sliceParent = sliceEffect.gameObject.transform.parent;
+    sliceParent.localEulerAngles = new Vector3(-12.262f, 49.942f, 4.754f);
+    attackEndRotation = sliceParent.rotation;
     climbingIterations = 0;
     RunInPlace();
 	}
@@ -41,8 +49,14 @@ public class moveCharacter : MonoBehaviour {
 		else if(nextFloor == true){
 			transform.Translate  (left * Time.deltaTime * moveSpeed, Space.World);
 		}
+    else if(attacking)
+    {
+      float step = sliceSpeed * Time.deltaTime;
+      sliceParent.rotation = Quaternion.RotateTowards(sliceParent.rotation, attackEndRotation, step);
+    }
 		else
 			transform.Translate  (right * Time.deltaTime * moveSpeed, Space.World);
+
     if(climbStairs == true && gameObject.transform.position.y <= 5){
       gameObject.transform.Translate(0,2.5f * Time.deltaTime,0);
     }
@@ -127,6 +141,17 @@ public class moveCharacter : MonoBehaviour {
     Debug.Log("Performing attack!");
     moveSpeed = 0f;
     animator.SetTrigger(attackHash);
+  }
+  public void StartSliceEffect()
+  {
+    sliceParent.localEulerAngles = new Vector3(5.415f, -42.634f, 11.988f);
+    sliceEffect.Play();
+    attacking = true;
+  }
+  public void StopSliceEffect()
+  {
+    sliceEffect.Stop();
+    attacking = false;
   }
   public void Die()
   {
