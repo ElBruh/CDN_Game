@@ -43,7 +43,7 @@ public class RandomRoom : MonoBehaviour
     int randomIdx;
     for (int i = 0; i < numRoomPieces; i++)
     {    
-      GameObject roomPiece;
+      GameObject roomPiece = null;
       if (i == 0)
       {
         // instantiate left piece
@@ -76,8 +76,20 @@ public class RandomRoom : MonoBehaviour
       else
       {
         // instantiate center
-        randomIdx = rnd.Next(roomLUT.centerPieces.Count);
-        roomPiece = Instantiate(roomLUT.centerPieces[randomIdx]);
+        if (RandomRoom.IsCamp(roomID, floorNum))
+        {
+          if(i == 1)
+            roomPiece = Instantiate(roomLUT.campPiece1);
+          else if(i == 2)
+            roomPiece = Instantiate(roomLUT.campPiece2);
+        }
+        else
+        {
+          randomIdx = rnd.Next(roomLUT.centerPieces.Count);
+          roomPiece = Instantiate(roomLUT.centerPieces[randomIdx]);
+        }
+        
+        
       }
       roomPiece.transform.SetParent(go.transform);
       rr.roomPieces.Add(roomPiece);
@@ -102,7 +114,7 @@ public class RandomRoom : MonoBehaviour
       else
         rr.ladder.transform.localPosition = new Vector3(-rr.roomWidth / 2 + rr.ladderMargin, -0.1f, -0.5f);
     }
-    if(hasEnemy)
+    if (hasEnemy && !RandomRoom.IsCamp(roomID, floorNum))
     {
       randomIdx = rnd.Next(roomLUT.enemies.Count);
       rr.enemy = Instantiate(roomLUT.enemies[randomIdx]);
@@ -115,6 +127,13 @@ public class RandomRoom : MonoBehaviour
     }
 
     return go;
+  }
+  public static bool IsCamp(int roomID, int floorNum)
+  {
+    if (roomID == 0 && floorNum > 1)
+      return true;
+    else
+      return false;
   }
   // Use this for initialization
   void Start()
