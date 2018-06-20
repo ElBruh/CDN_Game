@@ -29,7 +29,7 @@ public class moveCharacter : MonoBehaviour {
     moveSpeed = 0f;
     climbingIterations = 0;
     player = GameObject.FindGameObjectWithTag("Hero");
-    Invoke("StartMoving", 0.5f);
+    StartMoving();
 	}
   public void HitEnemy()
   {
@@ -136,6 +136,7 @@ public class moveCharacter : MonoBehaviour {
 		}
 		Debug.Log(transform.position);
     
-    Invoke("StartMoving", 1f);
+    StartMoving();
+    moveSpeed = 4;
   }
 }
