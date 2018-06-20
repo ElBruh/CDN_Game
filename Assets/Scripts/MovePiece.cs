@@ -12,7 +12,8 @@ public class MovePiece : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		transform.Translate(speed * Time.deltaTime,0f,0f);
+		//transform.Translate(transform.right * speed * Time.deltaTime, Space.World);
+		transform.Translate(speed * Time.deltaTime,0f,0f, Space.World);
 	}
 	public void StopMovingPiece(){
 		speed = 0f;

@@ -17,6 +17,7 @@ public class RandomSpawn : MonoBehaviour {
 	private float offsetZLimit;
 	private float treeRangeXMax;
 	private float treeRangeXMin;
+
 	private bool set = false;
 	private float timer = 3f;
 
@@ -52,10 +53,11 @@ public class RandomSpawn : MonoBehaviour {
 			var treeIndex = Random.Range(0,trees.Length);
 			var positionx = Random.Range(treeRangeXMax, treeRangeXMin);
 			var positionz = Random.Range(-17, 17);
+			var rotY = Random.Range(0,361);
 			while(positionz > -5 && positionz < 5){
 				positionz = Random.Range(-17, 17);
 			}
-			Instantiate(trees[treeIndex], new Vector3(positionx,0f,positionz), Quaternion.identity);
+			Instantiate(trees[treeIndex], new Vector3(positionx,0f,positionz), Quaternion.Euler(0f,rotY,0f));
 			count++;
 		}
 	}
