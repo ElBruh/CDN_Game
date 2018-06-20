@@ -10,6 +10,8 @@ public class RoomLUT : MonoBehaviour {
   public List<GameObject> floorPieces;
   public GameObject floorLeftEnd;
   public GameObject floorRightEnd;
+  public GameObject campPiece1;
+  public GameObject campPiece2;
   public List<GameObject> enemies;
   public GameObject ladder;
 

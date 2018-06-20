@@ -9,6 +9,7 @@ public class moveCharacter : MonoBehaviour {
 	public bool moveNext = false;
 	public Vector3 right;
 	public Vector3 left;
+  public GameObject popup;
   private bool climbing;
   private int climbingIterations;
   private Animator animator;
@@ -20,16 +21,13 @@ public class moveCharacter : MonoBehaviour {
   private int attackHash = Animator.StringToHash("Attack");
   private int climbLeftHash = Animator.StringToHash("ClimbLeft");
   private int climbRightHash = Animator.StringToHash("ClimbRight");
-  private GameObject player;
   private bool climbStairs = false;
   // Update is called once per frame
   void Start(){
 		Debug.Log(transform.position);
     animator = GetComponent<Animator>();
-    moveSpeed = 0f;
     climbingIterations = 0;
-    player = GameObject.FindGameObjectWithTag("Hero");
-    StartMoving();
+    RunInPlace();
 	}
   public void HitEnemy()
   {
@@ -45,8 +43,8 @@ public class moveCharacter : MonoBehaviour {
 		}
 		else
 			transform.Translate  (right * Time.deltaTime * moveSpeed, Space.World);
-    if(climbStairs == true && player.transform.position.y <= 5){
-      player.transform.Translate(0,2.5f * Time.deltaTime,0);
+    if(climbStairs == true && gameObject.transform.position.y <= 5){
+      gameObject.transform.Translate(0,2.5f * Time.deltaTime,0);
     }
 	}
 
@@ -61,7 +59,20 @@ public class moveCharacter : MonoBehaviour {
     if (col.gameObject.tag == "Stairs"){
       climbStairs = true;
     }
-	}
+    if (col.gameObject.tag == "Camp" && !col.gameObject.GetComponent<Camp>().encountered)
+    {
+      col.gameObject.GetComponent<Camp>().encountered = true;
+      MakeCamp();
+    }
+  }
+
+  public void MakeCamp()
+  {
+    moveSpeed = 0f;
+    animator.SetTrigger(combatHash);
+    var instance = Instantiate(popup);
+  }
+
   public void ClimbingIter()
   {
     climbingIterations++;
@@ -72,8 +83,14 @@ public class moveCharacter : MonoBehaviour {
       GameObject.Find("ObstacleManager").GetComponent<LadderManager>().FloorTransition();
     }
   }
+  public void RunInPlace()
+  {
+    moveSpeed = 0;
+    animator.SetTrigger(moveHash);
+  }
   public void StartMoving()
   {
+    moveSpeed = 4;
     animator.SetTrigger(moveHash);
   }
   public void ApproachEnemy()
@@ -137,6 +154,5 @@ public class moveCharacter : MonoBehaviour {
 		Debug.Log(transform.position);
     
     StartMoving();
-    moveSpeed = 4;
   }
 }
