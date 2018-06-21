@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public void StartGame(){
+		Debug.Log("StartGame in MainMenu has been called");
 		mainMenu.enabled = false;
 		healthBar.enabled = true;
 		blackFade.enabled = true;
