@@ -28,6 +28,7 @@ public class LadderManager : MonoBehaviour
   public LadderStates ladderState;
   public Image blackScreen;
   private WordDisplay wordDisplay;
+  private List<string> encouragePhrase;
 
 
   void Start()
@@ -39,16 +40,26 @@ public class LadderManager : MonoBehaviour
 
   public void OnTextCompleted()
   {
-    wordDisplay.StopDisplay();
-    ladderState = LadderStates.ClimbingLadder;
-    hero.GetComponent<moveCharacter>().Climb();
+    if(encouragePhrase.Count > 0)
+    {
+      wordDisplay.NewText(ladder.transform, encouragePhrase[0]);
+      encouragePhrase.RemoveAt(0);
+    }
+    else
+    {
+      wordDisplay.StopDisplay();
+      ladderState = LadderStates.ClimbingLadder;
+      hero.GetComponent<moveCharacter>().Climb();
+    }
+    
   }
   void Update()
   {
     switch (ladderState)
     {
       case LadderStates.InputSetup:
-        wordDisplay.NewText(ladder.transform, encouragements.GetPhrase());
+        wordDisplay.NewText(ladder.transform, encouragePhrase[0]);
+        encouragePhrase.RemoveAt(0);
         ladderState = LadderStates.TakingInput;
         break;
 
@@ -65,6 +76,8 @@ public class LadderManager : MonoBehaviour
     this.hero = hero;
     this.ladder = ladder;
     wordDisplay.StartDisplay(OnTextCompleted, timerLength: 0f);
+    string[] splitString = encouragements.GetPhrase().Split(null);
+    encouragePhrase = new List<string>(splitString);
     ladderState = LadderStates.InputSetup;
   }
 
