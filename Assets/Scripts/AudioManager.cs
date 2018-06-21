@@ -44,6 +44,7 @@ public class AudioManager: MonoBehaviour{
 		}
 	}
 	public void StartGame(){
+		Debug.Log("StartGame in AudioManager has been called");
 		timeToPlay = 15f;
 	}
 	public void Tap(){
