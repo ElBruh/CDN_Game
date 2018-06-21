@@ -21,7 +21,7 @@ public class RandomFloor : MonoBehaviour {
     rf.rooms = new List<GameObject>();
     for (int i = 0; i < rf.roomCount; i++)
     {
-      GameObject room = RandomRoom.Create(go, i, floorNum, rf.roomCount, hasEnemy:true);
+      GameObject room = RandomRoom.Create(go, i, floorNum, rf.roomCount, hasEnemy:false);
       rf.rooms.Add(room);
     }
 
