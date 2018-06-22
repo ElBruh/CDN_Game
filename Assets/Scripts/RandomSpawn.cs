@@ -20,6 +20,8 @@ public class RandomSpawn : MonoBehaviour {
 
 	private bool set = false;
 	private float timer = 3f;
+	private int next = 0;
+	private int floorCount;
 
 	void Start(){
 		offsetx = 125f;
@@ -37,12 +39,14 @@ public class RandomSpawn : MonoBehaviour {
 		timer-=Time.deltaTime;
 		if(count >= treeLimit && timer <= 0){
 			if (set == false){
-				treeLimit = 10;
+				treeLimit = 7;
 				treeRangeXMax = 13f;
 			}
 			set = true;
+			offsetx = 0;
 			count = 0;
 			TreeSpawn();
+			GroundSpawn();
 			timer = 3f;
 		}
 	}
@@ -63,11 +67,28 @@ public class RandomSpawn : MonoBehaviour {
 	}
 	private void GroundSpawn(){
 		while(offsetx >= offsetXLimit){
-			var groundIndex = Random.Range(0,ground.Length);
-			Instantiate(ground[groundIndex],new Vector3(offsetx,0f,offsetz), Quaternion.identity);
+			var groundIndex = 3;
+			if (floorCount < 5){
+				groundIndex = 3;
+			}
+			if (floorCount == 6){
+				groundIndex = next;
+			}
+			if(floorCount > 6){
+				groundIndex = 3;
+			}
+			if (floorCount >= 12){
+				floorCount = 0;
+			}
+			Instantiate(ground[groundIndex],new Vector3(offsetx,0f,offsetz), Quaternion.Euler(0f,90,0f));
+			floorCount++;
 			if(offsetz == offsetZLimit){
-				offsetx -= 3f;
+				offsetx -= 5f;
 				offsetz = -35;
+				next++;
+				if (next > 2){
+					next = 0;
+				}
 			}
 			offsetz+=5;
 		}
