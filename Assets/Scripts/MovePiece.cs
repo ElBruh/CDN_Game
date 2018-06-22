@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MovePiece : MonoBehaviour {
 
-	private float speed = 4f;
+	private float speed = 1.66f;
 	// Use this for initialization
 	void Start () {
 		
