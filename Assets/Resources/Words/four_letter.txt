@@ -15,7 +15,6 @@ bath
 bear
 beat
 been
-beer
 bell
 belt
 best
@@ -79,7 +78,6 @@ deep
 deny
 desk
 dial
-dick
 diet
 disc
 disk
@@ -297,7 +295,6 @@ once
 only
 onto
 open
-oral
 over
 pace
 pack

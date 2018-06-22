@@ -13,7 +13,6 @@ adviser
 against
 airline
 airport
-alcohol
 alleged
 already
 analyst
@@ -235,7 +234,6 @@ journey
 justice
 justify
 keeping
-killing
 kingdom
 kitchen
 knowing
@@ -411,7 +409,6 @@ similar
 sitting
 sixteen
 skilled
-smoking
 society
 somehow
 someone

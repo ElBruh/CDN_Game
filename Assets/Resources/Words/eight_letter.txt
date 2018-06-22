@@ -59,7 +59,6 @@ capacity
 casualty
 catching
 category
-Catholic
 cautious
 cellular
 ceremony
@@ -178,7 +177,6 @@ evidence
 exchange
 exciting
 exercise
-explicit
 exposure
 extended
 external
@@ -346,7 +344,6 @@ possible
 powerful
 practice
 precious
-pregnant
 presence
 preserve
 pressing
