@@ -12,7 +12,7 @@ public class ManageSpawnedItems : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(player.transform.position.x+25 < transform.position.x){
+		if(player.transform.position.x+30 < transform.position.x){
 			Destroy(gameObject);
 		}
 	}
