@@ -23,6 +23,19 @@ public class Message
 
 public class MessageService {
   private static string url_root = "http://encourage.codesalmon.com";
+  private static System.Random rnd = new System.Random();
+  private static List<Message> fallbackMessages = new List<Message>()
+  {
+    new Message("Our greatest weakness lies in giving up. The most certain way to succeed is always to try just one more time.", "Thomas A. Edison"),
+    new Message("Never, never, never give up.", "Winston Churchill"),
+    new Message("You must do the thing you think you cannot do.", "Eleanor Roosevelt"),
+    new Message("Accept the challenges so that you can feel the exhilaration of victory.", "George S. Patton"),
+    new Message("Even if you fall on your face, you’re still moving forward.", "Victor Kiam"),
+    new Message("You will never do anything in this world without courage. It is the greatest quality in the mind next to honor.", "Aristotle"),
+    new Message("We may encounter many defeats but we must not be defeated.", "Maya Angelou"),
+    new Message("In order to succeed, we must first believe that we can.", "Nikos Kazantzakis"),
+  };
+
   public static IEnumerator GetRandomMessage(System.Action<Message> callback)
   {
     Message msg;
@@ -33,7 +46,7 @@ public class MessageService {
     if (request.isNetworkError || request.isHttpError)
     {
       Debug.Log("Something went wrong, and returned error: " + request.error);
-      msg = new Message("Hello World!", "Me");
+      msg = GetFallbackMessage();
     }
     else
     {
@@ -48,7 +61,7 @@ public class MessageService {
       else
       {
         Debug.Log("Request failed (status:" + request.responseCode + ")");
-        msg = new Message("Hello World!", "Me");
+        msg = GetFallbackMessage();
       }
     }
 
@@ -92,5 +105,9 @@ public class MessageService {
     if(callback != null)
       callback(requestErrorOccurred);
   }
-
+  public static Message GetFallbackMessage()
+  {
+    int randomIdx = rnd.Next(fallbackMessages.Count);
+    return fallbackMessages[randomIdx];
+  }
 }
