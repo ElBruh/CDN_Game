@@ -22,11 +22,10 @@ public class LadderManager : MonoBehaviour
   public Camera cam;
 
   public EncouragementsList encouragements;
-  public TextMeshProUGUI floorText;
+  public GameObject blackScreen;
   private GameObject hero;
   private GameObject ladder;
   public LadderStates ladderState;
-  public Image blackScreen;
   private WordDisplay wordDisplay;
   private List<string> encouragePhrase;
 
@@ -83,39 +82,20 @@ public class LadderManager : MonoBehaviour
 
   public void FloorTransition()
   {
+    BlackScreen blackScreenComp = blackScreen.GetComponent<BlackScreen>();
     ladderState = LadderStates.Transition;
-    FadeToBlack();
-
+    StartCoroutine(blackScreenComp.FadeToBlack(0.5f, 0.0f));
+    StartCoroutine(blackScreenComp.FadeFromBlack(0.5f, 1.0f));
+    Invoke("NextFloor", 1.0f);
+    string floorText = "Floor " + GameObject.Find("TowerManager").GetComponent<LevelManager>().currentFloor.ToString(); 
+    StartCoroutine(blackScreenComp.FadeInText(floorText, 0.5f, 1.5f));
+    StartCoroutine(blackScreenComp.FadeOutText(0.5f, 2.5f));
+    
   }
 
-  void FadeToBlack()
-  {
-    blackScreen.color = Color.black;
-    blackScreen.canvasRenderer.SetAlpha(0.0f);
-    blackScreen.CrossFadeAlpha(1.0f, 0.5f, false);
-    Invoke("FadeInFloorText", 1.5f);
-    Invoke("FadeFromBlack", 1f);
-  }
-
-  void FadeFromBlack()
+  public void NextFloor()
   {
     hero.GetComponent<moveCharacter>().Next();
-    blackScreen.color = Color.black;
-    blackScreen.canvasRenderer.SetAlpha(1.0f);
-    blackScreen.CrossFadeAlpha(0.0f, 0.5f, false);
   }
-  void FadeInFloorText()
-  {
-    floorText.text = "Floor " + GameObject.Find("TowerManager").GetComponent<LevelManager>().currentFloor.ToString();
-    floorText.canvasRenderer.SetAlpha(0.0f);
-    floorText.CrossFadeAlpha(1.0f, 0.5f, false);
-    Invoke("FadeOutFloorText", 1f);
-  }
-  void FadeOutFloorText()
-  {
-    //floorText.text = "";
-    floorText.canvasRenderer.SetAlpha(1.0f);
-    floorText.CrossFadeAlpha(0.0f, 0.5f, false);
-  }
-
+  
 }

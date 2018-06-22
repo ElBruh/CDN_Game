@@ -23,13 +23,13 @@ public class CombatManager : MonoBehaviour {
 
 	public float health = 100f;
   public Camera cam;
-
+  public GameObject blackScreen;
 	public Canvas enemyBarPrefab;
 	
 	public Canvas healthBarV2;
 
   public WordList list;
-	
+  public GameObject deathMessage;
 	public GameObject tempEnemy;
 	public float damage = 0;
 	private float damageToGive;
@@ -57,7 +57,7 @@ public class CombatManager : MonoBehaviour {
     damageToGive = 0;
     if (health <= 0)
     {
-      SceneManager.LoadScene(0);
+      PlayDeathSequence();
     }
   }
   public void OnTextCompleted()
@@ -86,7 +86,33 @@ public class CombatManager : MonoBehaviour {
         break;
     }
   }
+  public void PlayDeathSequence()
+  {
+    wordDisplay.StopDisplay();
+    hero.GetComponent<moveCharacter>().Die();
+    GameObject.Find("GameManager").GetComponent<GameManager>().StartZoomIn();
 
+    BlackScreen blackScreenComp = blackScreen.GetComponent<BlackScreen>();
+    StartCoroutine(blackScreenComp.FadeInText("THE HERO IS DEAD", 1f, 2f));
+    StartCoroutine(blackScreenComp.FadeToBlack(1f, 3.5f));
+    StartCoroutine(blackScreenComp.FadeOutText(1f, 5f));
+
+    //Invoke("FadeInDeathText", 2f);
+    Invoke("RestartGame", 7f);
+    
+  }
+
+  public void FadeInDeathText()
+  {
+    GameObject deathCanvasObj = Instantiate(deathMessage);
+    Text deathText = deathCanvasObj.GetComponentInChildren<Text>();
+    deathText.canvasRenderer.SetAlpha(0.0f);
+    deathText.CrossFadeAlpha(1.0f, 1.0f, false);
+  }
+  public void RestartGame()
+  {
+    SceneManager.LoadScene(0);
+  }
   void AddDamage(){
 		damage = 10;
 		damageToGive += damage;
@@ -143,7 +169,7 @@ public class CombatManager : MonoBehaviour {
     bool dead = false;
     if (dead)
     {
-      
+      PlayDeathSequence();
     }
     else
     {
@@ -207,7 +233,7 @@ public class CombatManager : MonoBehaviour {
     bool dead = false;
     if (dead)
     {
-
+      PlayDeathSequence();
     }
     else
     {
