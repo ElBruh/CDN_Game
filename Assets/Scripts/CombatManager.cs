@@ -38,6 +38,7 @@ public class CombatManager : MonoBehaviour {
   private WordDisplay wordDisplay;
   
   public AudioManager music;
+  public string curDifficulty = "Easy";
   
 
 	void Start(){
@@ -67,7 +68,7 @@ public class CombatManager : MonoBehaviour {
     switch (combatState)
     {
       case CombatStates.InputSetup:
-        wordDisplay.NewText(tempEnemy.transform, list.GetWord());
+        wordDisplay.NewText(tempEnemy.transform, list.GetWord(curDifficulty));
         combatState = CombatStates.TakingInput;
         break;
 
@@ -96,7 +97,7 @@ public class CombatManager : MonoBehaviour {
       combatState = CombatStates.HeroAttack;
     }
     else
-      wordDisplay.NewText(tempEnemy.transform, list.GetWord());		
+      wordDisplay.NewText(tempEnemy.transform, list.GetWord(curDifficulty));		
 	}
 
 	void ChangeColor(){
@@ -114,6 +115,7 @@ public class CombatManager : MonoBehaviour {
     this.hero = hero;
     this.tempEnemy = enemy;
     
+    SetWordDifficulty(levelOfRoom);
     SetEnemyHealth(tempEnemy.name, levelOfRoom);
     
     healthBarV2 = Instantiate(enemyBarPrefab, new Vector3(tempEnemy.transform.position.x, tempEnemy.transform.position.y + 2f, tempEnemy.transform.position.z + 1.5f), Quaternion.Euler(0, -90, 0));
@@ -121,6 +123,18 @@ public class CombatManager : MonoBehaviour {
     wordDisplay.StartDisplay(OnTextCompleted, OnTimerExpired, OnIncorrectLetter);
     
     combatState = CombatStates.InputSetup;
+  }
+
+  public void SetWordDifficulty(int levelOfRoom){
+    if (levelOfRoom <= 20){
+      curDifficulty = "Easy";
+    }
+    if (levelOfRoom <= 50 && levelOfRoom > 20){
+      curDifficulty = "Medium";
+    }
+    if (levelOfRoom <= 100 && levelOfRoom > 50){
+      curDifficulty = "Hard";
+    }
   }
   public void ResolveEnemyAttack()
   {
