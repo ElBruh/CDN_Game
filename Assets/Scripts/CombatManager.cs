@@ -38,7 +38,9 @@ public class CombatManager : MonoBehaviour {
   private WordDisplay wordDisplay;
   
   public AudioManager music;
-  public string curDifficulty = "Easy";
+  public string curDifficulty;
+
+  public Dropdown dif;
   
 
 	void Start(){
@@ -101,7 +103,6 @@ public class CombatManager : MonoBehaviour {
     Invoke("RestartGame", 7f);
     
   }
-
   public void FadeInDeathText()
   {
     GameObject deathCanvasObj = Instantiate(deathMessage);
@@ -152,15 +153,34 @@ public class CombatManager : MonoBehaviour {
   }
 
   public void SetWordDifficulty(int levelOfRoom){
-    if (levelOfRoom <= 20){
-      curDifficulty = "Easy";
+    /*if(dif.options[dif.value].text == "Normal"){
+      if (levelOfRoom <= 20){
+        curDifficulty = "Easy";
+      }
+      if (levelOfRoom <= 50 && levelOfRoom > 20){
+        curDifficulty = "Medium";
+      }
+      if (levelOfRoom <= 100 && levelOfRoom > 50){
+        curDifficulty = "Hard";
+      }
+    }*/
+      /*Testing Difficulties */
+    if(dif.options[dif.value].text == "Normal"){
+      if (levelOfRoom <= 1){
+        curDifficulty = "Easy";
+      }
+      if (levelOfRoom <= 2 && levelOfRoom > 1){
+        curDifficulty = "Medium";
+      }
+      if (levelOfRoom <= 3 && levelOfRoom > 2){
+        curDifficulty = "Hard";
+      }
     }
-    if (levelOfRoom <= 50 && levelOfRoom > 20){
-      curDifficulty = "Medium";
+    
+    else {
+      curDifficulty = dif.options[dif.value].text;
     }
-    if (levelOfRoom <= 100 && levelOfRoom > 50){
-      curDifficulty = "Hard";
-    }
+    
   }
   public void ResolveEnemyAttack()
   {
