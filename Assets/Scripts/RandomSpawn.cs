@@ -80,7 +80,7 @@ public class RandomSpawn : MonoBehaviour {
 			if (floorCount >= 12){
 				floorCount = 0;
 			}
-			Instantiate(ground[groundIndex],new Vector3(offsetx,0f,offsetz), Quaternion.Euler(0f,90,0f));
+			Instantiate(ground[groundIndex],new Vector3(offsetx,0f,offsetz), Quaternion.Euler(0f,0,0f));
 			floorCount++;
 			if(offsetz == offsetZLimit){
 				offsetx -= 5f;
