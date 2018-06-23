@@ -31,7 +31,7 @@ public class RandomFloor : MonoBehaviour {
     return go;
   }
 
-  public float GetFloorY { get { Debug.Log(floorNum); return (floorNum - 1) * floorHeight + towerOffset; } }
+  public float GetFloorY { get { return (floorNum - 1) * floorHeight + towerOffset; } }
   public int GetFloorNum { get { return floorNum; } }
 
   // Use this for initialization

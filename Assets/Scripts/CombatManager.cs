@@ -22,6 +22,8 @@ public class CombatManager : MonoBehaviour {
 
 
 	public float health = 100f;
+  public float baseEnemyDmg = 10f;
+  public float wrongLetterDmg = 5f;
   public Camera cam;
   public GameObject blackScreen;
 	public Canvas enemyBarPrefab;
@@ -38,7 +40,6 @@ public class CombatManager : MonoBehaviour {
   
   public AudioManager music;
   public string curDifficulty;
-
   public Dropdown dif;
   
 
@@ -53,17 +54,21 @@ public class CombatManager : MonoBehaviour {
   }
   public void OnIncorrectLetter()
   {
-    GameObject.FindGameObjectWithTag("HitPointBar").GetComponent<ManageHitPoints>().Clear();
-    health -= 10f;
-    damageToGive = 0;
+    DamageHero(wrongLetterDmg);
+  }
+  public bool DamageHero(float dmg)
+  {
+    health -= dmg;
     if (health <= 0)
     {
       PlayDeathSequence();
+      return true;
     }
+    return false;
   }
-  public void OnTextCompleted()
+  public void OnTextCompleted(int wordLength)
   {
-    AddDamage();
+    AddDamage(wordLength);
   }
   void Update(){
     switch (combatState)
@@ -104,11 +109,14 @@ public class CombatManager : MonoBehaviour {
 
   public void RestartGame()
   {
+    Cursor.visible = true;
     SceneManager.LoadScene(0);
   }
-  void AddDamage(){
-		damage = 10;
-		damageToGive += damage;
+  void AddDamage(int wordLength)
+  {
+		damage = wordLength*5;
+    Debug.Log("Word Dmg: " + damage);
+    damageToGive += damage;
 		bool maxed = GameObject.FindGameObjectWithTag("HitPointBar").GetComponent<ManageHitPoints>().BuildUp(damage);
     if (maxed)
     {
@@ -119,10 +127,7 @@ public class CombatManager : MonoBehaviour {
       wordDisplay.NewText(tempEnemy.transform, list.GetWord(curDifficulty));		
 	}
 
-	void ChangeColor(){
-		//Can set an active color for this word.
-		//mText.color = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
-	}
+
 	public void ChangeToDead(){
     wordDisplay.StopDisplay();	
 	}
@@ -134,8 +139,8 @@ public class CombatManager : MonoBehaviour {
     this.hero = hero;
     this.tempEnemy = enemy;
     
-    SetWordDifficulty(levelOfRoom);
-    SetEnemyHealth(tempEnemy.name, levelOfRoom);
+    SetWordDifficulty(GetTrueRoomLevel(levelOfRoom));
+    SetEnemyHealth(tempEnemy.name, GetTrueRoomLevel(levelOfRoom));
     
     healthBarV2 = Instantiate(enemyBarPrefab, new Vector3(tempEnemy.transform.position.x, tempEnemy.transform.position.y + 2f, tempEnemy.transform.position.z + 1.5f), Quaternion.Euler(0, -90, 0));
     
@@ -144,46 +149,45 @@ public class CombatManager : MonoBehaviour {
     combatState = CombatStates.InputSetup;
   }
 
-  public void SetWordDifficulty(int levelOfRoom){
-    /*if(dif.options[dif.value].text == "Normal"){
-      if (levelOfRoom <= 20){
-        curDifficulty = "Easy";
-      }
-      if (levelOfRoom <= 50 && levelOfRoom > 20){
-        curDifficulty = "Medium";
-      }
-      if (levelOfRoom <= 100 && levelOfRoom > 50){
-        curDifficulty = "Hard";
-      }
-    }*/
-      /*Testing Difficulties */
-    if(dif.options[dif.value].text == "Normal"){
-      if (levelOfRoom <= 1){
-        curDifficulty = "Easy";
-      }
-      if (levelOfRoom <= 2 && levelOfRoom > 1){
-        curDifficulty = "Medium";
-      }
-      if (levelOfRoom <= 3 && levelOfRoom > 2){
-        curDifficulty = "Hard";
-      }
+  public void SetWordDifficulty(int trueRoomLevel){
+    if (trueRoomLevel > 25)
+    {
+      curDifficulty = "Hard";
     }
-    
-    else {
-      curDifficulty = dif.options[dif.value].text;
+    else if (trueRoomLevel > 10 ){
+      curDifficulty = "Medium";
     }
-    
+    else
+    {
+      curDifficulty = "Easy";
+    } 
+  }
+  public int GetTrueRoomLevel(int levelOfRoom)
+  {
+    if(levelOfRoom == 0)
+    {
+      levelOfRoom += 1;
+    }
+    if(dif.options[dif.value].text == "Easy")
+    {
+      return levelOfRoom;
+    }
+    else if (dif.options[dif.value].text == "Normal" || dif.options[dif.value].text == "Medium")
+    {
+      return levelOfRoom + 10;
+    }
+    else if (dif.options[dif.value].text == "Hard")
+    {
+      return levelOfRoom + 25;
+    }
+    return levelOfRoom;
   }
   public void ResolveEnemyAttack()
   {
     //music.FireSound();
-    Debug.Log("Resolving enemy attack");
-    bool dead = false;
-    if (dead)
-    {
-      PlayDeathSequence();
-    }
-    else
+    
+    bool dead = DamageHero(baseEnemyDmg);
+    if(!dead)
     {
       combatState = CombatStates.InputSetup;
     }
@@ -199,6 +203,7 @@ public class CombatManager : MonoBehaviour {
   public void EnemyHitByHero()
   {
     music.SwordClash();
+    Debug.Log("Round Dmg: " + damageToGive);
     bool dead = tempEnemy.GetComponent<Life>().TakeDamage(damageToGive);
     damageToGive = 0;
     if (dead)
@@ -233,8 +238,8 @@ public class CombatManager : MonoBehaviour {
       default :
         break;
     }
-    var life = tempEnemy.GetComponent<Life>().life = enemyLevel * levelOfRoom;
-    //Debug.Log("Enemy Health: " + life);
+    tempEnemy.GetComponent<Life>().life = enemyLevel * levelOfRoom/2;
+    Debug.Log("Enemy Health: " + tempEnemy.GetComponent<Life>().life);
  }
   public void HeroHitByEnemy()
   {

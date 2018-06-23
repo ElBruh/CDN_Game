@@ -10,6 +10,7 @@ public class WordDisplay : MonoBehaviour {
   public TextMeshPro mText;
   private TextMeshPro pText;
   private int letter;
+  private int currentWordLength;
 
   public bool wordExists = false;
   public float timer;
@@ -18,7 +19,7 @@ public class WordDisplay : MonoBehaviour {
   public Camera cam;
 
   public delegate void TimerExpired();
-  public delegate void WordCompleted();
+  public delegate void WordCompleted(int length);
   public delegate void IncorrectLetter();
 
   private bool currentLetter = false;
@@ -64,7 +65,7 @@ public class WordDisplay : MonoBehaviour {
         timer -= Time.deltaTime;
       if (mText.text.Length == 0)
       {
-        textCompletedCallback();
+        textCompletedCallback(currentWordLength);
         music.FinishWord();
       }
 
@@ -117,7 +118,7 @@ public class WordDisplay : MonoBehaviour {
     mText = Instantiate(mTextPrefab, new Vector3(xform.position.x, xform.position.y + 1f, xform.position.z), Quaternion.Euler(0, -90, 0));
     
     mText.text = text;
-
+    currentWordLength = text.Length;
     wordExists = true;
   }
 }

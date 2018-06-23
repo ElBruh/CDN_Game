@@ -16,7 +16,6 @@ public class EncouragementPopup : MonoBehaviour {
     signatureText.text = "";
     StartCoroutine(MessageService.GetRandomMessage(message =>
     {
-      Debug.Log(message.text);
       messageText.text = message.text;
       signatureText.text = "- " + message.author;
     }));

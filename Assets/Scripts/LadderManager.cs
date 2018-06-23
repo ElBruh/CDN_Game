@@ -37,7 +37,7 @@ public class LadderManager : MonoBehaviour
     encouragements = new EncouragementsList();
   }
 
-  public void OnTextCompleted()
+  public void OnTextCompleted(int wordLength)
   {
     if(encouragePhrase.Count > 0)
     {
@@ -87,7 +87,7 @@ public class LadderManager : MonoBehaviour
     StartCoroutine(blackScreenComp.FadeToBlack(0.5f, 0.0f));
     StartCoroutine(blackScreenComp.FadeFromBlack(0.5f, 1.0f));
     Invoke("NextFloor", 1.0f);
-    string floorText = "Floor " + GameObject.Find("TowerManager").GetComponent<LevelManager>().currentFloor.ToString(); 
+    string floorText = "Floor " + (GameObject.Find("TowerManager").GetComponent<LevelManager>().currentFloor + 1).ToString(); // floor + 1 because NextFloor gets called too late.
     StartCoroutine(blackScreenComp.FadeInText(floorText, 0.5f, 1.5f));
     StartCoroutine(blackScreenComp.FadeOutText(0.5f, 2.5f));
     

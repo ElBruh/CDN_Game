@@ -27,7 +27,6 @@ public class moveCharacter : MonoBehaviour {
 
   // Update is called once per frame
   void Start(){
-		Debug.Log(transform.position);
     animator = GetComponent<Animator>();
     climbingIterations = 0;
     WalkInPlace();
@@ -128,7 +127,6 @@ public class moveCharacter : MonoBehaviour {
   }
   public void Attack()
   {
-    Debug.Log("Performing attack!");
     moveSpeed = 0f;
     animator.SetTrigger(attackHash);
   }
@@ -156,7 +154,6 @@ public class moveCharacter : MonoBehaviour {
       transform.Rotate(new Vector3(0, 180, 0));
 			nextFloor = true;
 		}
-		Debug.Log(transform.position);
     
     StartMoving();
   }

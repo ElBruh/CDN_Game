@@ -20,7 +20,6 @@ public class WordList {
 		}
 		//will choose a random word
 		var wordIndex = Random.Range(0, words.Count);
-		Debug.Log(words[wordIndex]);
 		return words[wordIndex];
 	}
 

@@ -130,7 +130,8 @@ public class RandomRoom : MonoBehaviour
   }
   public static bool IsCamp(int roomID, int floorNum)
   {
-    if (roomID == 0 && floorNum > 1)
+    List<int> campFloors = new List<int>(){ 3, 7, 15 };
+    if (roomID == 0 && (campFloors.Contains(floorNum) || floorNum % 15 == 0))
       return true;
     else
       return false;

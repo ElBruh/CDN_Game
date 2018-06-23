@@ -17,7 +17,6 @@ public class CombatTrigger : MonoBehaviour {
 
   public void OnTriggerEnter(Collider other)
   {
-    Debug.Log("Start");
     // Because re-collision can happen.  Check if we're in combat too.
     if (other.gameObject.tag == "Enemy" && !GameObject.Find("Main Camera").GetComponent<FollowPlayer>().inCombat)
       heroController.CombatStart(other.gameObject);
