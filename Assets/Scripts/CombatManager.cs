@@ -29,7 +29,6 @@ public class CombatManager : MonoBehaviour {
 	public Canvas healthBarV2;
 
   public WordList list;
-  public GameObject deathMessage;
 	public GameObject tempEnemy;
 	public float damage = 0;
 	private float damageToGive;
@@ -99,17 +98,10 @@ public class CombatManager : MonoBehaviour {
     StartCoroutine(blackScreenComp.FadeToBlack(1f, 3.5f));
     StartCoroutine(blackScreenComp.FadeOutText(1f, 5f));
 
-    //Invoke("FadeInDeathText", 2f);
     Invoke("RestartGame", 7f);
     
   }
-  public void FadeInDeathText()
-  {
-    GameObject deathCanvasObj = Instantiate(deathMessage);
-    Text deathText = deathCanvasObj.GetComponentInChildren<Text>();
-    deathText.canvasRenderer.SetAlpha(0.0f);
-    deathText.CrossFadeAlpha(1.0f, 1.0f, false);
-  }
+
   public void RestartGame()
   {
     SceneManager.LoadScene(0);
