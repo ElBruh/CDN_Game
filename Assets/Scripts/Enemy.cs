@@ -14,7 +14,6 @@ public class Enemy : MonoBehaviour {
   // Use this for initialization
   void Start () {
     animator = GetComponent<Animator>();
-    attackPS = GetComponent<ParticleSystem>();
 	}
 	
 	// Update is called once per frame
