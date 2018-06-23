@@ -28,36 +28,25 @@ public class WordList {
 		words.Clear();
 		switch(Difficulty){
 		case "Easy" :
-			path1 = "Assets/Resources/Words/three_letter.txt";
-			path2 = "Assets/Resources/Words/four_letter.txt";
+			path1 = "Words/three_letter";
+			path2 = "Words/four_letter";
 			break;
 		case "Medium" :
-			path1 = "Assets/Resources/Words/five_letter.txt";
-			path2 = "Assets/Resources/Words/six_letter.txt";
+			path1 = "Words/five_letter";
+			path2 = "Words/six_letter";
 			break;
 		case "Hard" :
-			path1 = "Assets/Resources/Words/seven_letter.txt";
-			path2 = "Assets/Resources/Words/eight_letter.txt";
+			path1 = "Words/seven_letter";
+			path2 = "Words/eight_letter";
 			break;
 		}
 
-		StreamReader reader = new StreamReader(path1); 
-		string line;
-		
-		while((line = reader.ReadLine()) != null)  
-		{  			
-    		 words.Add(line);
-    		
-		} 
-		reader.Close();
+    TextAsset textAsset = Resources.Load(path1) as TextAsset;
+    words.AddRange(textAsset.text.Split(new[] { "\r\n", "\r", "\n" }, System.StringSplitOptions.None));
 
-		reader = new StreamReader(path2); 
-		while((line = reader.ReadLine()) != null)  
-		{  			
-    		 words.Add(line);
-    		
-		} 
-		reader.Close();
+    textAsset = Resources.Load(path2) as TextAsset;
+    words.AddRange(textAsset.text.Split(new[] { "\r\n", "\r", "\n" }, System.StringSplitOptions.None));
+
 		//Debug.Log(words[0]);
 
 		//Debug.Log(words[464]);
