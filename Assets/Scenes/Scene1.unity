@@ -3137,6 +3137,11 @@ Prefab:
       propertyPath: dif
       value: 
       objectReference: {fileID: 1212358817}
+    - target: {fileID: 114330861540153028, guid: cfb513244187b1b40b0c3b3a024b7605,
+        type: 2}
+      propertyPath: blackScreen
+      value: 
+      objectReference: {fileID: 1982593029}
     m_RemovedComponents:
     - {fileID: 95616230001945898, guid: cfb513244187b1b40b0c3b3a024b7605, type: 2}
     - {fileID: 114969159257459724, guid: cfb513244187b1b40b0c3b3a024b7605, type: 2}

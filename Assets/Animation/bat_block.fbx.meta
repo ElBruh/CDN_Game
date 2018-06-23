@@ -77,7 +77,7 @@ ModelImporter:
     - serializedVersion: 16
       name: BatBlock
       takeName: Armature|ArmatureAction
-      firstFrame: 11
+      firstFrame: 20
       lastFrame: 29
       wrapMode: 0
       orientationOffsetY: 0

@@ -255,7 +255,7 @@ public class CombatManager : MonoBehaviour {
   }
   public void ResolveHeroAttack()
   {
-    if(tempEnemy.GetComponent<Life>().life > 0)
+    if(tempEnemy != null && tempEnemy.GetComponent<Life>().life > 0)
       combatState = CombatStates.EnemyAttack;
   }
 }

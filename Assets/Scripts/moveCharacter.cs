@@ -15,6 +15,7 @@ public class moveCharacter : MonoBehaviour {
   private int climbingIterations;
   private Animator animator;
   private int moveHash = Animator.StringToHash("Move");
+  private int menuWalkHash = Animator.StringToHash("Walk");
   private int walkHash = Animator.StringToHash("GuardedWalk");
   private int combatHash = Animator.StringToHash("CombatStart");
   private int dieHash = Animator.StringToHash("Die");
@@ -29,7 +30,7 @@ public class moveCharacter : MonoBehaviour {
 		Debug.Log(transform.position);
     animator = GetComponent<Animator>();
     climbingIterations = 0;
-    RunInPlace();
+    WalkInPlace();
 	}
   public void HitEnemy()
   {
@@ -86,14 +87,14 @@ public class moveCharacter : MonoBehaviour {
       GameObject.Find("ObstacleManager").GetComponent<LadderManager>().FloorTransition();
     }
   }
-  public void RunInPlace()
+  public void WalkInPlace()
   {
     moveSpeed = 0;
-    animator.SetTrigger(moveHash);
+    animator.SetTrigger(menuWalkHash);
   }
   public void StartMoving()
   {
-    moveSpeed = 4;
+    moveSpeed = 4f;
     animator.SetTrigger(moveHash);
   }
   public void ApproachEnemy()

@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour {
 		blackFade.enabled = false;
     zoomIn = false;
 		cam.orthographicSize = 2.75f;
-	}
+  }
 
 	public void StartGame(){
 		Debug.Log("StartGame in MainMenu has been called");
@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour {
 		healthBar.enabled = true;
 		blackFade.enabled = true;
 		Cursor.visible = false;
-		GameObject.FindGameObjectWithTag("Hero").GetComponent<moveCharacter>().moveSpeed = 4;
+    GameObject.FindGameObjectWithTag("Hero").GetComponent<moveCharacter>().StartMoving();
 		trees = GameObject.FindGameObjectsWithTag("Tree");
 		foreach(GameObject tree in trees){
 			tree.GetComponent<MovePiece>().StopMovingPiece();
