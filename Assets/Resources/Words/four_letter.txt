@@ -60,7 +60,7 @@ cook
 cool
 cope
 copy
-CORE
+core
 cost
 crew
 crop
@@ -154,7 +154,7 @@ glad
 goal
 goes
 gold
-Golf
+golf
 gone
 good
 gray
@@ -253,7 +253,7 @@ main
 make
 male
 many
-Mark
+mark
 mass
 matt
 meal

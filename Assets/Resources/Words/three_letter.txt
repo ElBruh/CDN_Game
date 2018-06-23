@@ -64,7 +64,7 @@ bow
 box
 boy
 bud
-Bug
+bug
 bum
 bun
 bus
@@ -273,7 +273,7 @@ may
 med
 meg
 men
-Met
+met
 mid
 mil
 mix
