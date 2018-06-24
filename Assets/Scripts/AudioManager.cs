@@ -13,6 +13,7 @@ public class AudioManager: MonoBehaviour{
 	public AudioClip swordClash;
 	public AudioClip block;
 	public AudioClip fireSound;
+	public AudioClip deadSong;
 	
 	public AudioClip runSound;
 	public AudioSource source;
@@ -45,7 +46,7 @@ public class AudioManager: MonoBehaviour{
 	}
 	public void StartGame(){
 		Debug.Log("StartGame in AudioManager has been called");
-		timeToPlay = 15f;
+		timeToPlay = 15.75f;
 	}
 	public void Tap(){
 		/*Finished Letter */
@@ -74,6 +75,11 @@ public class AudioManager: MonoBehaviour{
 	}
 	public void SneakSound(){
 		
+	}
+	public void PlayerDead(){
+		MainMusic.Stop();
+		source.clip = deadSong;
+		source.Play();
 	}
 	public void SwordClash(){
 		source.clip = swordClash;

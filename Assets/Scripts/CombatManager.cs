@@ -94,6 +94,7 @@ public class CombatManager : MonoBehaviour {
   }
   public void PlayDeathSequence()
   {
+    music.PlayerDead();
     wordDisplay.StopDisplay();
     hero.GetComponent<moveCharacter>().Die();
     GameObject.Find("GameManager").GetComponent<GameManager>().StartZoomIn();

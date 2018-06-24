@@ -985,6 +985,7 @@ MonoBehaviour:
   swordClash: {fileID: 8300000, guid: 35dd53c64d185704abd8aa51e8dab44f, type: 3}
   block: {fileID: 8300000, guid: 44de071c9cf8be54e9594649df660a57, type: 3}
   fireSound: {fileID: 8300000, guid: 08d0b1699210def45ac7f38f56d42f82, type: 3}
+  deadSong: {fileID: 8300000, guid: 8471d1819618f4b47aa17eb796a4b1b5, type: 3}
   runSound: {fileID: 8300000, guid: e99f2d09c3b38a748876af9fb34f317b, type: 3}
   source: {fileID: 1120110323}
   EnemyAttack: {fileID: 503413988}
