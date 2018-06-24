@@ -27,13 +27,14 @@ public class AudioManager: MonoBehaviour{
 		/*We can decide when to start and end the intro music */
 		MainMusic.clip = introSong;
     	MainMusic.Play();
+		//MainMusic.volume = 1f;
 		timeToPlay = 100000f;
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		timeToPlay -= Time.deltaTime;
-		if (timeToPlay <- 0 && playGameMusic == false){
+		if (timeToPlay <= 0 && playGameMusic == false){
 			MainMusic.volume-=0.01f;
 			if(MainMusic.volume <= 0.001f){
 				MainMusic.Stop();

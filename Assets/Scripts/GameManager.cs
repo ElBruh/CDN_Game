@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour {
 
-	//public Light dayNight;
-	//private float rot;
+	public Light dayNight;
+	public float rotSpeed = 35f;
 	public Camera cam;
 	public Canvas mainMenu;
 	public Canvas healthBar;
@@ -13,8 +13,12 @@ public class GameManager : MonoBehaviour {
 	private GameObject[] trees;
 	private bool zoomOut;
   private bool zoomIn;
+	private bool rotate;
+	private bool keepRotating;
 	// Use this for initialization
 	void Start () {
+		rotate  = true;
+		keepRotating = true;
 		healthBar.enabled = false;
 		blackFade.enabled = false;
     zoomIn = false;
@@ -22,6 +26,7 @@ public class GameManager : MonoBehaviour {
   }
 
 	public void StartGame(){
+		rotate = false;
 		Debug.Log("StartGame in MainMenu has been called");
 		mainMenu.enabled = false;
 		healthBar.enabled = true;
@@ -38,8 +43,7 @@ public class GameManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		//rot+=0.2f;
-		//dayNight.transform.Rotate(0f,rot * Time.deltaTime,0f);
+		
 		if(Input.GetKeyDown("escape")){
 			//Time.timeScale = 0;
 			Application.Quit();
@@ -53,6 +57,19 @@ public class GameManager : MonoBehaviour {
       cam.orthographicSize -= 0.5f * Time.deltaTime;
     }
   }
+	void FixedUpdate(){
+		//Debug.Log(dayNight.transform.rotation.y);
+		if (rotate == true){
+			dayNight.transform.Rotate(0f,rotSpeed * Time.deltaTime,0f);
+		}
+		if (rotate == false && keepRotating == true){
+			dayNight.transform.Rotate(0f,rotSpeed * Time.deltaTime,0f);
+			if(dayNight.transform.rotation.y <= 0.1 && dayNight.transform.rotation.y >= -0.1){
+				keepRotating = false;
+			}
+		}
+		
+	}
 
   public void StartZoomIn()
   {
