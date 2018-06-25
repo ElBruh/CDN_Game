@@ -61,7 +61,7 @@ public class EncouragementsList
   "everything you need is already in you", "everything will work out", "do your best", "proud of you", "stay positive", "don't be discouraged",
     "don't be afraid", "look at how far you've come", "you've come a long way", "i'm cheering for you", "you are stronger than you know",
     "you are unstoppable", "just a little at a time", "don't stop trying", "don't think just do", "set your goals high", "believe that you can",
-    "it can be done", "make a new ending", "keep pressing one", "just move forward", "one step at a time", "never never never give up",
+    "it can be done", "make a new ending", "keep pressing on", "just move forward", "one step at a time", "never never never give up",
     "triumph begins with you", "believe in yourself", "do it against all odds", "the monsters are tough but you are tougher"};
 
 

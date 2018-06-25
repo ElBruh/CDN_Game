@@ -13,7 +13,7 @@ public class RandomRoom : MonoBehaviour
   public float roomPieceWidth = 5;
   public float roomPieceHeight = 5;
   public float roomWidth = 20;
-  private float ladderMargin = 3.0f;
+  private float ladderMargin = 6.0f;
   public int floorNum;
   public int roomID;
   public static GameObject Create(GameObject parentFloor, int roomID, int floorNum, int roomCount, bool hasEnemy=false)
