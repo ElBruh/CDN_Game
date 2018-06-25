@@ -14,8 +14,6 @@ public class AudioManager: MonoBehaviour{
 	public AudioClip block;
 	public AudioClip fireSound;
 	public AudioClip deadSong;
-	public AudioClip startGame;
-	public AudioClip runSound;
 	public AudioSource source;
 	public AudioSource EnemyAttack;
   	//public AudioSource EncounterMusic;
