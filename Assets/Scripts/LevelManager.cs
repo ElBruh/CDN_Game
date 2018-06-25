@@ -15,12 +15,14 @@ public class LevelManager : MonoBehaviour {
   private int lastFloor;
   public int currentFloor;
   private List<GameObject> floors;
+  private List<GameObject> trashFloors;
   //public GameObject[] trees;
   // Use this for initialization
   void Start () {
     currentFloor = 1;
     lastFloor = 0;
     floors = new List<GameObject>();
+    trashFloors = new List<GameObject>();
 		for(int i=0; i < numLevels; i ++)
     {
       lastFloor += 1;
@@ -36,10 +38,18 @@ public class LevelManager : MonoBehaviour {
 	}
   public void LevelUp()
   {
+    trashFloors.Add(floors[0]);
     floors.RemoveAt(0);
     lastFloor += 1;
     currentFloor += 1;
     floors.Add(RandomFloor.Create(lastFloor, 4));
+    if(trashFloors.Count > 3)
+    {
+      var floorToDelete = trashFloors[0];
+      trashFloors.RemoveAt(0);
+      Destroy(floorToDelete);
+    }
+      
   }
   
   public float GetCurrentFloorY()
