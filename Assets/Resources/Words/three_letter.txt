@@ -37,7 +37,7 @@ ave
 awe
 axe
 aye
-BAA
+baa
 bad
 bag
 ban
@@ -248,7 +248,7 @@ lax
 lay
 lea
 led
-Lee
+lee
 leg
 les
 let
