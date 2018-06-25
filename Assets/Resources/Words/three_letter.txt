@@ -31,7 +31,6 @@ art
 ash
 ask
 asp
-ass
 ate
 ave
 awe
@@ -170,7 +169,6 @@ gag
 gal
 gap
 gas
-gay
 gee
 gel
 gem
