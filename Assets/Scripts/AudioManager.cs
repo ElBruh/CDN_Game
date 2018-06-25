@@ -14,7 +14,7 @@ public class AudioManager: MonoBehaviour{
 	public AudioClip block;
 	public AudioClip fireSound;
 	public AudioClip deadSong;
-	
+	public AudioClip startGame;
 	public AudioClip runSound;
 	public AudioSource source;
 	public AudioSource EnemyAttack;
@@ -27,6 +27,7 @@ public class AudioManager: MonoBehaviour{
 		/*We can decide when to start and end the intro music */
 		MainMusic.clip = introSong;
     	MainMusic.Play();
+		source.volume = 1f;
 		//MainMusic.volume = 1f;
 		timeToPlay = 100000f;
 	}
@@ -35,17 +36,21 @@ public class AudioManager: MonoBehaviour{
 	void Update () {
 		timeToPlay -= Time.deltaTime;
 		if (timeToPlay <= 0 && playGameMusic == false){
+			source.volume = 0.57f;
 			MainMusic.volume-=0.01f;
 			if(MainMusic.volume <= 0.001f){
 				MainMusic.Stop();
 				MainMusic.clip = gameMusic;
-				MainMusic.volume = 1f;
+				MainMusic.volume = 0.75f;
 				MainMusic.Play();
 				playGameMusic = true;
 			}
 		}
 	}
 	public void StartGame(){
+		//source.clip = startGame;
+		//source.Play();
+		
 		Debug.Log("StartGame in AudioManager has been called");
 		timeToPlay = 15.75f;
 	}
